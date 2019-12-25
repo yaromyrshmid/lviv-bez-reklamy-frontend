@@ -3,6 +3,7 @@ import { Table, Button } from "react-bootstrap";
 import { connect } from "react-redux";
 
 import MarkerRow from "./MarkerRow";
+import Spinner from "../common/Spinner/Spinner";
 import { getUserMarkers } from "../../redux/actions/profileActions";
 import statuses from "../../utils/statuses";
 
@@ -91,6 +92,7 @@ const MarkersTable = props => {
           )}
         </div>
       )}
+      {props.loading && <Spinner />}
       <Table responsive striped bordered hover>
         <thead>
           <tr>
@@ -112,7 +114,8 @@ const MarkersTable = props => {
 };
 
 const mapStateToProps = state => ({
-  userMarkers: state.profile.userMarkers
+  userMarkers: state.profile.userMarkers,
+  loading: state.profile.loading
 });
 
 export default connect(mapStateToProps, { getUserMarkers })(MarkersTable);

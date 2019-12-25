@@ -1,7 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
+import Spinner from "../common/Spinner/Spinner";
+
 const MarkerRow = ({ marker }) => {
+  const [loading, setloading] = useState(true);
+
   return (
     <tr>
       <td>{marker.statusChange[marker.statusChange.length - 1].to}</td>
@@ -35,6 +39,7 @@ const MarkerRow = ({ marker }) => {
             }}
           ></span>
         </Link>
+        {loading && <Spinner />}
         <iframe
           title={marker._id}
           id="gmap_canvas"
@@ -44,6 +49,9 @@ const MarkerRow = ({ marker }) => {
           marginHeight="0"
           marginWidth="0"
           src={`https://maps.google.com/maps?q=${marker.location.lat}, ${marker.location.lng}&z=15&output=embed&z=18`}
+          onLoad={() => {
+            setloading(false);
+          }}
           // src={`https://maps.google.com/maps?q='+${marker.location.lat}+','+${marker.location.lat}+'&hl=es&z=14&amp;output=embed`}
         />
 

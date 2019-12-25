@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { connect } from "react-redux";
 
 import Map from "./Map";
 import Modal from "../modal/Modal";
+import Spinner from "../common/Spinner/Spinner";
 import AddNewMarkerForm from "../forms/AddNewMarkerForm";
 import keys from "../../utils/keys";
 
@@ -34,6 +36,7 @@ const MapContainer = props => {
           <AddNewMarkerForm location={clickLocation} closeModal={closeModal} />
         </Modal>
       )}
+      {props.loading && <Spinner />}
       <Map
         isMarkerShown
         googleMapURL={`https://maps.googleapis.com/maps/api/js?key=${keys.googleMap.key}&v=3.exp&libraries=geometry`}
@@ -55,4 +58,8 @@ const MapWrapper = styled.section`
   height: calc(100vh - 60px);
 `;
 
-export default MapContainer;
+const MapStateToProps = state => ({
+  loading: state.markers.loading
+});
+
+export default connect(MapStateToProps)(MapContainer);

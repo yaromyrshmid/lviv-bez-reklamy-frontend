@@ -18,6 +18,7 @@ const Map = props => {
 
   useEffect(() => {
     props.closeModal();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.markers]);
 
   const onMapClick = e => {
@@ -53,7 +54,6 @@ const Map = props => {
           <AdsMarker marker={marker} key={marker._id} />
         ))}
       </MarkerClusterer>
-      {/* <PolygonFromArray cityArray={Lviv} /> */}
     </GoogleMap>
   );
 };
