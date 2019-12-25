@@ -6,9 +6,6 @@ import AdsMarker from "../marker/AdsMarker";
 
 import { postMarker, getMarkers } from "../../redux/actions/markerActions";
 
-// import PolygonFromArray from "../polygon/PolygonFromArray";
-// import Lviv from "../../utils/polygons/Lviv";
-
 const {
   MarkerClusterer
 } = require("react-google-maps/lib/components/addons/MarkerClusterer");
@@ -40,7 +37,6 @@ const Map = props => {
     <GoogleMap
       defaultZoom={props.center ? 19 : 13}
       defaultCenter={center}
-      // center={center}
       onClick={onMapClick}
       options={{
         styles: [

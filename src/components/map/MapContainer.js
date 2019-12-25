@@ -11,7 +11,6 @@ const MapContainer = props => {
   const [clickLocation, setclickLocation] = useState({});
 
   const openModal = location => {
-    console.log("modal has location: ", location);
     setshowModal(true);
     setclickLocation(location);
   };
