@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import styled from "styled-components";
@@ -21,14 +21,14 @@ const Navigation = props => {
             {props.auth.isAuthenticated ? (
               <>
                 <Nav.Item>
-                  <Link to="/" className="nav-link">
+                  <NavLink exact to="/" className="nav-link">
                     Карта
-                  </Link>
+                  </NavLink>
                 </Nav.Item>
                 <Nav.Item>
-                  <Link to="/table" className="nav-link">
+                  <NavLink to="/table" className="nav-link">
                     Мої маркери
-                  </Link>
+                  </NavLink>
                 </Nav.Item>
                 <Button
                   variant="outline-secondary"
@@ -43,14 +43,14 @@ const Navigation = props => {
             ) : (
               <>
                 <Nav.Item>
-                  <Link to="/login" className="nav-link">
+                  <NavLink to="/login" className="nav-link">
                     Увійти
-                  </Link>
+                  </NavLink>
                 </Nav.Item>
                 <Nav.Item>
-                  <Link to="/register" className="nav-link">
+                  <NavLink to="/register" className="nav-link">
                     Зареєструватись
-                  </Link>
+                  </NavLink>
                 </Nav.Item>
               </>
             )}

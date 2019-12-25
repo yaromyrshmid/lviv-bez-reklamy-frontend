@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import { Provider } from "react-redux";
 import jwt_decode from "jwt-decode";
 
@@ -15,6 +15,7 @@ import Landing from "./components/landing/Landing";
 import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
 import MarkersTable from "./components/markersTable/MarkersTable";
+import PageNotFound from "./components/404/PageNotFound";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
@@ -41,18 +42,20 @@ function App() {
     <Provider store={store}>
       <BrowserRouter>
         <Layout className="App">
-          <Route exact path="/" component={Landing} />
-          <Route exact path="/register" component={Register} />
-          <Route exact path="/login" component={Login} />
           <Switch>
+            <Route exact path="/" component={Landing} />
+            <Route exact path="/register" component={Register} />
+            <Route exact path="/login" component={Login} />
+
             <PrivateRoute exact path="/table" component={MarkersTable} />
-          </Switch>
-          <Switch>
+
             <PrivateRoute
               exact
               path="/map/:location"
               component={MapContainer}
             />
+
+            <Route path="/" component={PageNotFound} />
           </Switch>
         </Layout>
       </BrowserRouter>
