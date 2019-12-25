@@ -76,7 +76,7 @@ const AdsMarker = props => {
                 </p>
               );
             })}
-            {props.auth.user.status === "admin" && (
+            {props.auth.user.role === "admin" && (
               <>
                 <UpdateMarkerStatus id={props.marker._id} />
                 <button onClick={handleDeleteMarker}>Видалити</button>
