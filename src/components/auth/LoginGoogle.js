@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { Row, Col } from "react-bootstrap";
 
 import { googleLogin } from "../../redux/actions/authActions";
+import keys from "../../utils/keys";
 
 const LoginGoogle = props => {
   const responseGoogle = response => {
@@ -18,7 +19,7 @@ const LoginGoogle = props => {
     <Row>
       <Col xs={12} md={8} className=" m-auto">
         <GoogleLogin
-          clientId="256970897886-oitm6bg6lvj8mrbgp2pi2edbagtq5595.apps.googleusercontent.com"
+          clientId={keys.googleLogin.clienId}
           buttonText="Вхід за допомогою Google"
           onSuccess={responseGoogle}
           onFailure={failGoogle}

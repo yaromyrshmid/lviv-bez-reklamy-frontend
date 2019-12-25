@@ -4,6 +4,7 @@ import styled from "styled-components";
 import Map from "./Map";
 import Modal from "../modal/Modal";
 import AddNewMarkerForm from "../forms/AddNewMarkerForm";
+import keys from "../../utils/keys";
 
 const MapContainer = props => {
   const [showModal, setshowModal] = useState(false);
@@ -36,9 +37,7 @@ const MapContainer = props => {
       )}
       <Map
         isMarkerShown
-        googleMapURL={
-          "https://maps.googleapis.com/maps/api/js?key=AIzaSyCoDbaLk0etEXW3l3FR1Ke7IxJFiP96M1s&v=3.exp&libraries=geometry"
-        }
+        googleMapURL={`https://maps.googleapis.com/maps/api/js?key=${keys.googleMap.key}&v=3.exp&libraries=geometry`}
         loadingElement={<div style={{ height: `100%` }} />}
         containerElement={<MapWrapper />}
         mapElement={<div style={{ height: `100%`, width: "100%" }} />}
