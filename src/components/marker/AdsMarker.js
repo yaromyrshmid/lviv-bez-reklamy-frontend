@@ -3,7 +3,7 @@ import { Marker, InfoWindow } from "react-google-maps";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
-import { deleteMarker } from "../../redux/actions/markerActions";
+import { deleteMarker } from "../../redux/actions/adminActions";
 import UpdateMarkerStatus from "../forms/UpdateMarkerStatusForm";
 
 import illegal from "../../assets/marker-illegal.svg";

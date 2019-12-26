@@ -26,7 +26,6 @@ export default function(state = initialState, action) {
           action.payload
         ]
       };
-
     case actionTypes.MARKERS_LOADING:
       return {
         ...state,

@@ -27,28 +27,6 @@ export const postMarker = postData => dispatch => {
     });
 };
 
-// Update marker status
-export const updateMarkerStatus = (newStatus, id) => dispatch => {
-  axios
-    .put(`/api/admin/markers/${id}`, { status: newStatus })
-    .then(res =>
-      dispatch({ type: actionTypes.UPDATE_MARKER, payload: res.data })
-    )
-    .catch(err => {
-      dispatch({ type: actionTypes.GET_ERRORS, payload: err.response.data });
-    });
-};
-
-// Delete marker
-export const deleteMarker = id => dispatch => {
-  axios
-    .delete(`/api/admin/markers/${id}`)
-    .then(res => dispatch({ type: actionTypes.DELETE_MARKER, payload: id }))
-    .catch(err =>
-      dispatch({ type: actionTypes.GET_ERRORS, payload: err.response.data })
-    );
-};
-
 // Set loading state
 export const setMarkersLoading = () => {
   return {

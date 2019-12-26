@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
-import { updateMarkerStatus } from "../../redux/actions/markerActions";
+import { updateMarkerStatus } from "../../redux/actions/adminActions";
 import statuses from "../../utils/statuses";
 
 const UpdateMarkerStatusForm = ({

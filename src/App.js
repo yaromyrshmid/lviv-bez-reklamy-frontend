@@ -9,12 +9,15 @@ import { setCurrentUser, logoutUser } from "./redux/actions/authActions";
 import { clearCurrentProfile } from "./redux/actions/profileActions";
 
 import PrivateRoute from "./components/common/PrivateRoute";
+import AdminRoute from "./components/common/AdminRoute";
+
 import Layout from "./components/layout/Layout";
 import MapContainer from "./components/map/MapContainer";
 import Landing from "./components/landing/Landing";
 import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
 import MarkersTable from "./components/markersTable/MarkersTable";
+import AdminMarkersTable from "./components/adminMarkersTable/AdminMarkersTable";
 import PageNotFound from "./components/404/PageNotFound";
 
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -46,15 +49,16 @@ function App() {
             <Route exact path="/" component={Landing} />
             <Route exact path="/register" component={Register} />
             <Route exact path="/login" component={Login} />
-
             <PrivateRoute exact path="/table" component={MarkersTable} />
-
             <PrivateRoute
               exact
               path="/map/:location"
               component={MapContainer}
             />
-
+            <AdminRoute
+              path="/admin/markerstable/"
+              component={AdminMarkersTable}
+            />
             <Route path="/" component={PageNotFound} />
           </Switch>
         </Layout>

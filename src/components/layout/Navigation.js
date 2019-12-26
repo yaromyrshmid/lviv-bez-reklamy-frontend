@@ -18,6 +18,15 @@ const Navigation = props => {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
           <Nav className="ml-auto">
+            {props.auth.isAuthenticated && props.auth.user.role === "admin" && (
+              <>
+                <Nav.Item>
+                  <NavLink to="/admin/markerstable" className="nav-link">
+                    Усі маркери
+                  </NavLink>
+                </Nav.Item>
+              </>
+            )}
             {props.auth.isAuthenticated ? (
               <>
                 <Nav.Item>
