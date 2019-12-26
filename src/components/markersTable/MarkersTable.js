@@ -96,6 +96,7 @@ const MarkersTable = props => {
       <Table responsive striped bordered hover>
         <thead>
           <tr>
+            <th>Адреса</th>
             <th>Статус</th>
             <th>Історія</th>
             <th>Коментар</th>

@@ -56,7 +56,7 @@ const AdminMarkersTable = props => {
       <Table responsive striped bordered hover>
         <thead>
           <tr>
-            <th>ID</th>
+            <th>Адреса</th>
             <th>Користувач</th>
             <th>Статус</th>
             <th>Історія</th>

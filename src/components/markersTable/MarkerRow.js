@@ -8,6 +8,10 @@ const MarkerRow = ({ marker }) => {
 
   return (
     <tr>
+      <td>
+        {marker.address &&
+          `${marker.address.streetName}, ${marker.address.streetNumber}, ${marker.address.neighborhood}`}
+      </td>
       <td>{marker.statusChange[marker.statusChange.length - 1].to}</td>
       <td>
         {marker.statusChange.map((status, index) => {

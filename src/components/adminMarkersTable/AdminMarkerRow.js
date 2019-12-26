@@ -12,7 +12,10 @@ const AdminMarkerRow = ({ marker, deleteMarker }) => {
 
   return (
     <tr>
-      <td>{marker._id}</td>
+      <td>
+        {marker.address &&
+          `${marker.address.streetName}, ${marker.address.streetNumber}, ${marker.address.neighborhood}`}
+      </td>
       <td>{marker.user}</td>
       <td>
         {marker.statusChange[marker.statusChange.length - 1].to}

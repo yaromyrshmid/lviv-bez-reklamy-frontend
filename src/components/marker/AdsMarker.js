@@ -60,7 +60,10 @@ const AdsMarker = props => {
       {infoOpen && (
         <InfoWindow>
           <>
-            <p> {props.marker._id}</p>
+            <p>
+              {props.marker.address &&
+                `${props.marker.address.streetName}, ${props.marker.address.streetNumber}, ${props.marker.address.neighborhood}`}
+            </p>
 
             <img
               src={"http://localhost:5000" + props.marker.photo}
