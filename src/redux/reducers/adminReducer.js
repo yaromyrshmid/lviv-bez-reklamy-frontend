@@ -15,24 +15,27 @@ export default function(state = initialState, action) {
         totalPages: action.payload.totalPages,
         loading: false
       };
-    // case actionTypes.UPDATE_MARKER:
-    //   return {
-    //     ...state,
-    //     markers: [
-    //       ...state.markers.filter(marker => marker._id !== action.payload._id),
-    //       action.payload
-    //     ]
-    //   };
+    case actionTypes.UPDATE_MARKER:
+      return {
+        ...state,
+        markers: state.markers.map(marker => {
+          if (marker._id !== action.payload._id) {
+            return marker;
+          } else {
+            return action.payload;
+          }
+        })
+      };
     case actionTypes.ADMIN_LOADING:
       return {
         ...state,
         loading: true
       };
-    // case actionTypes.DELETE_MARKER:
-    //   return {
-    //     ...state,
-    //     markers: state.markers.filter(marker => marker._id !== action.payload)
-    //   };
+    case actionTypes.DELETE_MARKER:
+      return {
+        ...state,
+        markers: state.markers.filter(marker => marker._id !== action.payload)
+      };
     default:
       return state;
   }

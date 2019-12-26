@@ -1,17 +1,26 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { Button } from "react-bootstrap";
+import { connect } from "react-redux";
 
 // import Spinner from "../common/Spinner/Spinner";
-import { Button } from "react-bootstrap";
+import UpdateMarkerStatus from "../forms/UpdateMarkerStatusForm";
+import { deleteMarker } from "../../redux/actions/adminActions";
 
-const AdminMarkerRow = ({ marker }) => {
+const AdminMarkerRow = ({ marker, deleteMarker }) => {
   // const [loading, setloading] = useState(true);
 
   return (
     <tr>
       <td>{marker._id}</td>
       <td>{marker.user}</td>
-      <td>{marker.statusChange[marker.statusChange.length - 1].to}</td>
+      <td>
+        {marker.statusChange[marker.statusChange.length - 1].to}
+        <UpdateMarkerStatus
+          id={marker._id}
+          currentStatus={marker.statusChange[marker.statusChange.length - 1].to}
+        />
+      </td>
       <td>
         {marker.statusChange.map((status, index) => {
           return (
@@ -62,10 +71,12 @@ const AdminMarkerRow = ({ marker }) => {
         <p>Довгота: {marker.location.lng}</p>
       </td>
       <td>
-        <Button variant="danger">Видалити</Button>
+        <Button variant="danger" onClick={() => deleteMarker(marker._id)}>
+          Видалити
+        </Button>
       </td>
     </tr>
   );
 };
 
-export default AdminMarkerRow;
+export default connect(null, { deleteMarker })(AdminMarkerRow);

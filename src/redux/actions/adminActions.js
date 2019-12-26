@@ -14,7 +14,7 @@ export const updateMarkerStatus = (newStatus, id) => dispatch => {
     });
 };
 
-// Delete marker on map
+// Delete marker on map and in table
 export const deleteMarker = id => dispatch => {
   axios
     .delete(`/api/admin/markers/${id}`)
