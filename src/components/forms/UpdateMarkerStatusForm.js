@@ -5,7 +5,12 @@ import { connect } from "react-redux";
 import { updateMarkerStatus } from "../../redux/actions/markerActions";
 import statuses from "../../utils/statuses";
 
-const UpdateMarkerStatusForm = ({ updateMarkerStatus, errors, id }) => {
+const UpdateMarkerStatusForm = ({
+  updateMarkerStatus,
+  errors,
+  id,
+  currentStatus
+}) => {
   const [newStatus, setnewStatus] = useState("");
 
   const onChange = e => {
@@ -29,7 +34,12 @@ const UpdateMarkerStatusForm = ({ updateMarkerStatus, errors, id }) => {
             </option>
           ))}
         </select>
-        <button type="submit">Змінити</button>
+        <button
+          type="submit"
+          disabled={newStatus === currentStatus || newStatus === ""}
+        >
+          Змінити
+        </button>
       </form>
     </div>
   );
