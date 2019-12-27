@@ -14,6 +14,17 @@ export default function(state = initialState, action) {
         userMarkers: action.payload,
         loading: false
       };
+    case actionTypes.UPDATE_USER_MARKER:
+      return {
+        ...state,
+        userMarkers: state.userMarkers.map(marker => {
+          if (marker._id !== action.payload._id) {
+            return marker;
+          } else {
+            return action.payload;
+          }
+        })
+      };
     case actionTypes.PROFILE_LOADING:
       return {
         ...state,

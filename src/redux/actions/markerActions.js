@@ -34,6 +34,18 @@ export const setMarkersLoading = () => {
   };
 };
 
+// Post comment to marker if last comment was from moderator
+export const postComment = (comment, id) => dispatch => {
+  axios
+    .post(`/api/markers/comment/${id}`, { comment: comment })
+    .then(res =>
+      dispatch({ type: actionTypes.UPDATE_USER_MARKER, payload: res.data })
+    )
+    .catch(err => {
+      dispatch({ type: actionTypes.GET_ERRORS, payload: err });
+    });
+};
+
 // Clear errors
 export const clearErrors = () => {
   return {

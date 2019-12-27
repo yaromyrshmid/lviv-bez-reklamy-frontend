@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
 
 import Spinner from "../common/Spinner/Spinner";
+import AddCommentForm from "../forms/AddCommentForm";
+import { postComment } from "../../redux/actions/markerActions";
 
-const MarkerRow = ({ marker }) => {
+const MarkerRow = ({ marker, user, postComment }) => {
   const [loading, setloading] = useState(true);
 
   return (
@@ -24,7 +27,20 @@ const MarkerRow = ({ marker }) => {
           );
         })}
       </td>
-      <td>{marker.comment} </td>
+      <td>
+        {marker.comments.map(({ comment, author }, index) => (
+          <div key={index}>
+            <p>
+              {author === user.id ? user.name : "Модератор"}:{comment}
+            </p>
+          </div>
+        ))}
+        {/* Rendering conditionally comment form with post comment action and marker ID */}
+        {marker.comments[marker.comments.length - 1] &&
+          marker.comments[marker.comments.length - 1].author !== user.id && (
+            <AddCommentForm postComment={postComment} markerId={marker._id} />
+          )}
+      </td>
       <td>
         <img
           src={"http://localhost:5000" + marker.photo}
@@ -66,4 +82,8 @@ const MarkerRow = ({ marker }) => {
   );
 };
 
-export default MarkerRow;
+const mapStateToProps = state => ({
+  user: state.auth.user
+});
+
+export default connect(mapStateToProps, { postComment })(MarkerRow);

@@ -5,9 +5,13 @@ import { connect } from "react-redux";
 
 // import Spinner from "../common/Spinner/Spinner";
 import UpdateMarkerStatus from "../forms/UpdateMarkerStatusForm";
-import { deleteMarker } from "../../redux/actions/adminActions";
+import AddCommentForm from "../forms/AddCommentForm";
+import {
+  deleteMarker,
+  postAdminComment
+} from "../../redux/actions/adminActions";
 
-const AdminMarkerRow = ({ marker, deleteMarker }) => {
+const AdminMarkerRow = ({ marker, deleteMarker, user, postAdminComment }) => {
   // const [loading, setloading] = useState(true);
 
   return (
@@ -35,7 +39,19 @@ const AdminMarkerRow = ({ marker, deleteMarker }) => {
           );
         })}
       </td>
-      <td>{marker.comment} </td>
+      <td>
+        {/* Mapping all comments */}
+        {marker.comments.map(({ comment, author }, index) => (
+          <div key={index}>
+            <p>
+              {/* Here will get author by populating on backe-end */}
+              {author === user.id ? "Модератор" : author}:{comment}
+            </p>
+          </div>
+        ))}
+        {/* Rendering comment form with admin action and marker ID */}
+        <AddCommentForm postComment={postAdminComment} markerId={marker._id} />
+      </td>
       <td>
         <img
           src={"http://localhost:5000" + marker.photo}
@@ -82,4 +98,10 @@ const AdminMarkerRow = ({ marker, deleteMarker }) => {
   );
 };
 
-export default connect(null, { deleteMarker })(AdminMarkerRow);
+const mapStateToProps = state => ({
+  user: state.auth.user
+});
+
+export default connect(mapStateToProps, { deleteMarker, postAdminComment })(
+  AdminMarkerRow
+);

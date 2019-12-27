@@ -37,6 +37,18 @@ export const getAdminMarkers = page => dispatch => {
     );
 };
 
+//Post admin comment
+export const postAdminComment = (comment, id) => dispatch => {
+  axios
+    .post(`/api/admin/markers/comment/${id}`, { comment: comment })
+    .then(res =>
+      dispatch({ type: actionTypes.UPDATE_MARKER, payload: res.data })
+    )
+    .catch(err => {
+      dispatch({ type: actionTypes.GET_ERRORS, payload: err.response.data });
+    });
+};
+
 // Set loading state
 export const setMarkersLoading = () => {
   return {
