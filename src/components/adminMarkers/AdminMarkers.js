@@ -6,7 +6,7 @@ import MarkerRow from "./AdminMarkerRow";
 import Spinner from "../ui/Spinner/Spinner";
 import { getAdminMarkers } from "../../redux/actions/adminActions";
 
-const AdminMarkersTable = props => {
+const AdminMarkers = props => {
   const [currentPage, setcurrentPage] = useState(1);
 
   useEffect(() => {
@@ -82,4 +82,4 @@ const mapStateToProps = state => ({
   loading: state.admin.loading
 });
 
-export default connect(mapStateToProps, { getAdminMarkers })(AdminMarkersTable);
+export default connect(mapStateToProps, { getAdminMarkers })(AdminMarkers);

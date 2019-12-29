@@ -16,8 +16,8 @@ import MapContainer from "./components/map/MapContainer";
 import Landing from "./components/landing/Landing";
 import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
-import MarkersTable from "./components/markersTable/MarkersTable";
-import AdminMarkersTable from "./components/adminMarkersTable/AdminMarkersTable";
+import MyMarkers from "./components/myMarkers/MyMarkers";
+import AdminMarkers from "./components/adminMarkers/AdminMarkers";
 import PageNotFound from "./components/404/PageNotFound";
 
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -49,16 +49,13 @@ function App() {
             <Route exact path="/" component={Landing} />
             <Route exact path="/register" component={Register} />
             <Route exact path="/login" component={Login} />
-            <PrivateRoute exact path="/table" component={MarkersTable} />
+            <PrivateRoute exact path="/mymarkers" component={MyMarkers} />
             <PrivateRoute
               exact
               path="/map/:location"
               component={MapContainer}
             />
-            <AdminRoute
-              path="/admin/markerstable/"
-              component={AdminMarkersTable}
-            />
+            <AdminRoute path="/admin/markers" component={AdminMarkers} />
             <Route path="/" component={PageNotFound} />
           </Switch>
         </Layout>

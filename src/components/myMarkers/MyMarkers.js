@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Table, Container, Row, Col } from "react-bootstrap";
+import { Container, Row, Col } from "react-bootstrap";
 import { connect } from "react-redux";
 
 import MarkerRow from "./MarkerRow";

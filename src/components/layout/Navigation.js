@@ -23,7 +23,7 @@ const Navigation = props => {
             {props.auth.isAuthenticated && props.auth.user.role === "admin" && (
               <>
                 <NavItem>
-                  <NavLink to="/admin/markerstable">Усі маркери</NavLink>
+                  <NavLink to="/admin/markers">Усі маркери</NavLink>
                 </NavItem>
               </>
             )}
@@ -35,7 +35,7 @@ const Navigation = props => {
                   </NavLink>
                 </NavItem>
                 <NavItem>
-                  <NavLink to="/table">Мої маркери</NavLink>
+                  <NavLink to="/mymarkers">Мої маркери</NavLink>
                 </NavItem>
                 <Button
                   empty
