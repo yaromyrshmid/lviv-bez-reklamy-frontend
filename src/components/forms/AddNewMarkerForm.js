@@ -10,6 +10,7 @@ const AddNewMarkerForm = ({ location, postMarker, errors }) => {
   const [comment, setcomment] = useState("");
   const [checkMarkerInCity, setcheckMarkerInCity] = useState(true);
   const [image, setimage] = useState({ file: null, url: null });
+  const [submitDisabled, setsubmitDisabled] = useState(false);
 
   useEffect(() => {
     if (pointInPoligon([location.lng, location.lat])) {
@@ -18,6 +19,10 @@ const AddNewMarkerForm = ({ location, postMarker, errors }) => {
       setcheckMarkerInCity(false);
     }
   }, [location.lng, location.lat]);
+
+  useEffect(() => {
+    setsubmitDisabled(false);
+  }, [errors]);
 
   const onChange = e => {
     setcomment(e.target.value);
@@ -38,6 +43,7 @@ const AddNewMarkerForm = ({ location, postMarker, errors }) => {
     formData.append("comment", comment);
     formData.append("image", image.file);
     postMarker(formData);
+    setsubmitDisabled(true);
   };
 
   return (
@@ -66,7 +72,10 @@ const AddNewMarkerForm = ({ location, postMarker, errors }) => {
           type="text"
         />
         {!checkMarkerInCity && <span>Точка за межами міста</span>}
-        <button type="submit" disabled={!checkMarkerInCity || !image.file}>
+        <button
+          type="submit"
+          disabled={!checkMarkerInCity || !image.file || submitDisabled}
+        >
           Додати
         </button>
       </form>
