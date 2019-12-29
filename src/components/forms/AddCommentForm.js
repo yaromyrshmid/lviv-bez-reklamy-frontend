@@ -2,6 +2,7 @@ import React, { useState } from "react";
 // import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
+import { Button } from "../ui";
 import TextFieldGroup from "./fields/TextFieldGroup";
 
 const AddCommentForm = ({ postComment, errors, markerId }) => {
@@ -28,9 +29,9 @@ const AddCommentForm = ({ postComment, errors, markerId }) => {
           onChange={onChange}
           type="text"
         />
-        <button type="submit" disabled={!(comment.length > 3)}>
-          Відповісти
-        </button>
+        <Button type="submit" disabled={!(comment.length > 3)} empty>
+          <span> Відповісти</span>
+        </Button>
       </form>
     </div>
   );

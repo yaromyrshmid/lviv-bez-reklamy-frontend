@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import styled from "styled-components";
 
 const TextFieldGroup = ({
   name,
@@ -13,7 +14,7 @@ const TextFieldGroup = ({
 }) => {
   return (
     <div className="form-group">
-      <input
+      <Input
         type={type}
         placeholder={placeholder}
         name={name}
@@ -26,6 +27,12 @@ const TextFieldGroup = ({
     </div>
   );
 };
+
+const Input = styled.input`
+  &:focus {
+    outline: 1px solid var(--mainDark);
+  }
+`;
 
 TextFieldGroup.propTypes = {
   name: PropTypes.string.isRequired,

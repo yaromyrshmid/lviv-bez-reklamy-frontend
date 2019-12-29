@@ -4,7 +4,7 @@ import Navigation from "./Navigation";
 
 const Layout = ({ children }) => {
   return (
-    <div className="App">
+    <div>
       <Navigation />
       {children}
     </div>

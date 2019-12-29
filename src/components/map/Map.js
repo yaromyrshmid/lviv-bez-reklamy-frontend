@@ -36,7 +36,7 @@ const Map = props => {
 
   return (
     <GoogleMap
-      defaultZoom={props.center ? 19 : 13}
+      defaultZoom={props.center ? 17 : 13}
       defaultCenter={center}
       onClick={onMapClick}
       options={{

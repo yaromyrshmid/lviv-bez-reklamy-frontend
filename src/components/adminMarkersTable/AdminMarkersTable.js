@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { Table, Button } from "react-bootstrap";
 
 import MarkerRow from "./AdminMarkerRow";
-import Spinner from "../common/Spinner/Spinner";
+import Spinner from "../ui/Spinner/Spinner";
 import { getAdminMarkers } from "../../redux/actions/adminActions";
 
 const AdminMarkersTable = props => {

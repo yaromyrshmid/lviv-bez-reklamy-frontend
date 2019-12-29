@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 
 import Map from "./Map";
 import Modal from "../modal/Modal";
-import Spinner from "../common/Spinner/Spinner";
+import Spinner from "../ui/Spinner/Spinner";
 import AddNewMarkerForm from "../forms/AddNewMarkerForm";
 import keys from "../../utils/keys";
 
@@ -55,7 +55,7 @@ const MapContainer = props => {
 
 const MapWrapper = styled.section`
   width: 100vw;
-  height: calc(100vh - 60px);
+  height: calc(100vh - 70px);
 `;
 
 const MapStateToProps = state => ({
