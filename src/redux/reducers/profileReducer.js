@@ -3,7 +3,7 @@ import * as actionTypes from "../actions/types";
 const initialState = {
   userMarkers: [],
   profile: null,
-  loading: false
+  loading: true
 };
 
 export default function(state = initialState, action) {
