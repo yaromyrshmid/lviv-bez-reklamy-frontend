@@ -4,14 +4,15 @@ import { Link } from "react-router-dom";
 
 import AddCommentForm from "../../forms/AddCommentForm";
 import { Button, Spinner } from "../";
+import HistoryDisplay from "./HistoryDisplay";
 
-const VisualDataDisplay = ({
+const AdminVisualDataDisplay = ({
   photo,
   location,
   id,
   comments,
   postComment,
-  user
+  statusChange
 }) => {
   const [display, setdisplay] = useState("photo");
   const [loading, setloading] = useState(true);
@@ -29,15 +30,20 @@ const VisualDataDisplay = ({
         <Button width="100%" margin="1rem 0" onClick={() => setdisplay("map")}>
           <span>Карта</span>
         </Button>
-        {comments.length > 0 && (
-          <Button
-            width="100%"
-            margin="1rem 0"
-            onClick={() => setdisplay("comments")}
-          >
-            <span>Коментарі</span>
-          </Button>
-        )}
+        <Button
+          width="100%"
+          margin="1rem 0"
+          onClick={() => setdisplay("comments")}
+        >
+          <span>Коментарі</span>
+        </Button>
+        <Button
+          width="100%"
+          margin="1rem 0"
+          onClick={() => setdisplay("history")}
+        >
+          <span>Історія</span>
+        </Button>
       </ControlPanel>
       <DisplayArea>
         {display === "photo" && (
@@ -77,19 +83,16 @@ const VisualDataDisplay = ({
               <CommentWrapper key={index}>
                 <p className="date">{new Date(date).toLocaleString("uk-UA")}</p>
                 <p>
-                  <span className="name">
-                    {author === user.id ? user.name : "Модератор"}:{" "}
-                  </span>
+                  <span className="name">{author.name}: </span>
                   {comment}
                 </p>
               </CommentWrapper>
             ))}
-            {/* Rendering conditionally comment form with post comment action and marker ID */}
-            {comments[comments.length - 1] &&
-              comments[comments.length - 1].author !== user.id && (
-                <AddCommentForm postComment={postComment} markerId={id} />
-              )}
+            <AddCommentForm postComment={postComment} markerId={id} />
           </CommentsContainer>
+        )}
+        {display === "history" && (
+          <HistoryDisplay statusChange={statusChange} />
         )}
       </DisplayArea>
     </VisualDataDisplayWrapper>
@@ -169,4 +172,4 @@ const CommentWrapper = styled.div`
   }
 `;
 
-export default VisualDataDisplay;
+export default AdminVisualDataDisplay;

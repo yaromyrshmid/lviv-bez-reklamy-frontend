@@ -15,7 +15,8 @@ const AddressDisplay = ({ address }) => {
 };
 
 const AddressWrapper = styled.div`
-  padding: 1rem;
+  margin-top: 1rem;
+  padding: 0 1rem;
 `;
 
 export default AddressDisplay;

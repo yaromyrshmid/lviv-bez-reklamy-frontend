@@ -25,10 +25,10 @@ export const deleteMarker = id => dispatch => {
 };
 
 //Get markers for admin table
-export const getAdminMarkers = page => dispatch => {
+export const getAdminMarkers = (page, statusFilter) => dispatch => {
   dispatch(setMarkersLoading());
   axios
-    .get(`/api/admin/markers/${page}`)
+    .post(`/api/admin/markers/${page}`, { statusFilter: statusFilter })
     .then(res => {
       dispatch({ type: actionTypes.GET_ADMIN_MARKERS, payload: res.data });
     })
@@ -46,6 +46,18 @@ export const postAdminComment = (comment, id) => dispatch => {
     )
     .catch(err => {
       dispatch({ type: actionTypes.GET_ERRORS, payload: err.response.data });
+    });
+};
+
+//Ban user
+export const banUser = userId => dispatch => {
+  axios
+    .put(`/api/admin/users/ban/${userId}`)
+    .then(res =>
+      dispatch({ type: actionTypes.UPDATE_USER_IN_MARKERS, payload: res.data })
+    )
+    .catch(err => {
+      console.log(err);
     });
 };
 

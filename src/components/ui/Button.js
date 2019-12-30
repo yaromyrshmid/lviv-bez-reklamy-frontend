@@ -12,6 +12,11 @@ const Button = styled.button`
   border: 1px solid var(--main);
   color: ${props => (props.empty ? "var(--main)" : "var(--mainWhite)")};
   cursor: pointer;
+
+  /* Danger button */
+  background-color: ${props => props.danger && "var(--notfound)"};
+  border: ${props => props.danger && "1px solid var(--mainWhite)"};
+
   /* Adding margin through props */
   margin: ${props => props.margin};
 

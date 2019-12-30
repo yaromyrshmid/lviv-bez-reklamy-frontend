@@ -3,7 +3,7 @@ import * as actionTypes from "../actions/types";
 const initialState = {
   markers: [],
   totalPages: 0,
-  loading: false
+  loading: true
 };
 
 export default function(state = initialState, action) {
@@ -35,6 +35,18 @@ export default function(state = initialState, action) {
       return {
         ...state,
         markers: state.markers.filter(marker => marker._id !== action.payload)
+      };
+    case actionTypes.UPDATE_USER_IN_MARKERS:
+      return {
+        ...state,
+        markers: state.markers.map(marker => {
+          if (marker.user._id !== action.payload._id) {
+            return marker;
+          } else {
+            const newMarker = { ...marker, user: action.payload };
+            return newMarker;
+          }
+        })
       };
     default:
       return state;

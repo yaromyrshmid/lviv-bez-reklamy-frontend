@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import styled from "styled-components";
 
+import { Button } from "../ui";
 import { updateMarkerStatus } from "../../redux/actions/adminActions";
 import statuses from "../../utils/statuses";
 
@@ -23,9 +25,9 @@ const UpdateMarkerStatusForm = ({
   };
 
   return (
-    <div>
-      <p>Змінити статус</p>
+    <FormWrapper>
       <form onSubmit={onSubmit}>
+        <label>Змінити статус:</label>{" "}
         <select onChange={onChange}>
           <option value="">--Оберіть новий статус--</option>
           {statuses.map(stat => (
@@ -34,16 +36,32 @@ const UpdateMarkerStatusForm = ({
             </option>
           ))}
         </select>
-        <button
+        <Button
           type="submit"
           disabled={newStatus === currentStatus || newStatus === ""}
         >
-          Змінити
-        </button>
+          <span>Змінити</span>
+        </Button>
       </form>
-    </div>
+    </FormWrapper>
   );
 };
+
+const FormWrapper = styled.div`
+  margin-top: 1rem;
+  padding: 0 1rem;
+
+  label {
+    margin-right: 1rem;
+  }
+
+  select {
+    height: 2rem;
+  }
+  select:focus {
+    outline: 1px solid var(--mainDark);
+  }
+`;
 
 UpdateMarkerStatusForm.propTypes = {
   updateMarkerStatus: PropTypes.func.isRequired,

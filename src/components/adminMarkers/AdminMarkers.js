@@ -1,78 +1,64 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import { Table, Button } from "react-bootstrap";
+import { Container, Row, Col } from "react-bootstrap";
 
-import MarkerRow from "./AdminMarkerRow";
-import Spinner from "../ui/Spinner/Spinner";
+import { Filter, Spinner, Pagination, NotFoundMessage } from "../ui";
+import AdminMarkerRow from "./AdminMarkerRow";
 import { getAdminMarkers } from "../../redux/actions/adminActions";
+import statuses from "../../utils/statuses";
 
 const AdminMarkers = props => {
   const [currentPage, setcurrentPage] = useState(1);
+  const [statusFilter, setstatusFilter] = useState("");
 
   useEffect(() => {
-    props.getAdminMarkers(currentPage);
+    props.getAdminMarkers(currentPage, statusFilter);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentPage]);
+  }, [currentPage, statusFilter]);
 
-  // Handling pagination clicks
-  const paginationPrev = () => {
-    setcurrentPage(currentPage => currentPage - 1);
-  };
-
-  const paginationNext = () => {
-    setcurrentPage(currentPage => currentPage + 1);
-  };
-
-  const paginationFirst = () => {
-    setcurrentPage(1);
-  };
-
-  const paginationLast = () => {
-    setcurrentPage(props.totalPages);
+  const handleFiltering = value => {
+    setstatusFilter(value);
   };
 
   return (
-    <div>
+    <Container>
+      <Row>
+        <Col>
+          <Filter
+            handleFiltering={handleFiltering}
+            defaultOption="Уся реклама"
+            defaultValue=""
+            options={statuses.map(stat => ({
+              name: stat.ukr,
+              value: stat.value
+            }))}
+          />
+        </Col>
+      </Row>
       {/* Pagination */}
-      {props.totalPages !== 0 && (
-        <div>
-          {currentPage !== 1 && <Button onClick={paginationFirst}>1</Button>}
-          {currentPage !== 2 && currentPage !== 1 && <span>...</span>}
-          {currentPage - 1 > 1 && (
-            <Button onClick={paginationPrev}>{currentPage - 1}</Button>
-          )}
-          <Button disabled>{currentPage}</Button>
-          {currentPage + 1 < props.totalPages && (
-            <Button onClick={paginationNext}>{currentPage + 1}</Button>
-          )}
-          {currentPage !== props.totalPages - 1 &&
-            currentPage !== props.totalPages && <span>...</span>}
-          {currentPage !== props.totalPages && (
-            <Button onClick={paginationLast}>{props.totalPages}</Button>
-          )}
-        </div>
-      )}
+      <Row>
+        <Col>
+          <Pagination
+            totalPages={props.totalPages}
+            setcurrentPage={setcurrentPage}
+          />
+        </Col>
+      </Row>
+
       {props.loading && <Spinner />}
-      <Table responsive striped bordered hover>
-        <thead>
-          <tr>
-            <th>Адреса</th>
-            <th>Користувач</th>
-            <th>Статус</th>
-            <th>Історія</th>
-            <th>Коментар</th>
-            <th>Фото</th>
-            <th>Розташування</th>
-            <th>Видалити</th>
-          </tr>
-        </thead>
-        <tbody>
-          {props.markers.map(marker => (
-            <MarkerRow marker={marker} key={marker._id} />
-          ))}
-        </tbody>
-      </Table>
-    </div>
+      <Row>
+        {props.markers.map(marker => (
+          <AdminMarkerRow marker={marker} key={marker._id} />
+        ))}
+        {!props.loading && props.markers.length === 0 && (
+          <Col>
+            <NotFoundMessage>
+              Оце так невдача... Маркерів таких немає...
+            </NotFoundMessage>
+          </Col>
+        )}
+      </Row>
+    </Container>
   );
 };
 

@@ -3,9 +3,9 @@ import styled from "styled-components";
 
 import statuses from "../../../utils/statuses";
 
-const HistoryDisplay = ({ statusChange }) => {
+const HistoryDisplay = ({ statusChange, admin }) => {
   return (
-    <HistoryWrapper>
+    <HistoryWrapper admin>
       {statusChange.map((status, index) => (
         <p key={index}>
           {statuses
@@ -20,6 +20,10 @@ const HistoryDisplay = ({ statusChange }) => {
 
 const HistoryWrapper = styled.div`
   padding: 1rem;
+  max-height: ${props => (props.admin ? "100%" : "60%")};
+  overflow: scroll;
+  color: ${props => (props.admin ? "var(--mainWhite)" : "var(--main)")};
+  overflow-x: hidden;
 `;
 
 export default HistoryDisplay;
