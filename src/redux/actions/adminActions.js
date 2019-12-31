@@ -25,12 +25,22 @@ export const deleteMarker = id => dispatch => {
 };
 
 //Get markers for admin table
-export const getAdminMarkers = (page, statusFilter) => dispatch => {
+export const getAdminMarkers = (
+  page,
+  statusFilter,
+  selectedDate
+) => dispatch => {
   dispatch(setMarkersLoading());
   axios
-    .post(`/api/admin/markers/${page}`, { statusFilter: statusFilter })
+    .post(`/api/admin/markers/${page}`, {
+      statusFilter: statusFilter,
+      dateFilter: selectedDate
+    })
     .then(res => {
-      dispatch({ type: actionTypes.GET_ADMIN_MARKERS, payload: res.data });
+      dispatch({
+        type: actionTypes.GET_ADMIN_MARKERS,
+        payload: res.data
+      });
     })
     .catch(err =>
       dispatch({ type: actionTypes.GET_ADMIN_MARKERS, payload: null })

@@ -92,7 +92,7 @@ const AdminVisualDataDisplay = ({
           </CommentsContainer>
         )}
         {display === "history" && (
-          <HistoryDisplay statusChange={statusChange} />
+          <HistoryDisplay statusChange={statusChange} admin />
         )}
       </DisplayArea>
     </VisualDataDisplayWrapper>
@@ -156,7 +156,7 @@ const CommentsContainer = styled.div`
   height: 100%;
   background-color: var(--lighter);
   padding: 1rem;
-  overflow-y: scroll;
+  overflow-y: auto;
 `;
 
 const CommentWrapper = styled.div`

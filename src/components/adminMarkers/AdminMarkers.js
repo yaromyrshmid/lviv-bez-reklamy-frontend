@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { Container, Row, Col } from "react-bootstrap";
 
-import { Filter, Spinner, Pagination, NotFoundMessage } from "../ui";
+import { Filter, Spinner, Pagination, NotFoundMessage, Calendar } from "../ui";
 import AdminMarkerRow from "./AdminMarkerRow";
 import { getAdminMarkers } from "../../redux/actions/adminActions";
 import statuses from "../../utils/statuses";
@@ -10,14 +10,19 @@ import statuses from "../../utils/statuses";
 const AdminMarkers = props => {
   const [currentPage, setcurrentPage] = useState(1);
   const [statusFilter, setstatusFilter] = useState("");
+  const [selectedDate, setselectedDate] = useState(null);
 
   useEffect(() => {
-    props.getAdminMarkers(currentPage, statusFilter);
+    props.getAdminMarkers(currentPage, statusFilter, selectedDate);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentPage, statusFilter]);
+  }, [currentPage, statusFilter, selectedDate]);
 
   const handleFiltering = value => {
     setstatusFilter(value);
+  };
+
+  const handleDateChange = value => {
+    setselectedDate(value);
   };
 
   return (
@@ -36,6 +41,14 @@ const AdminMarkers = props => {
         </Col>
       </Row>
       {/* Pagination */}
+      <Row>
+        <Col>
+          <Calendar
+            selectedDate={selectedDate}
+            handleDateChange={handleDateChange}
+          />
+        </Col>
+      </Row>
       <Row>
         <Col>
           <Pagination
