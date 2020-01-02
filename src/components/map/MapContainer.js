@@ -16,8 +16,11 @@ const MapContainer = props => {
     setclickLocation(location);
   };
 
-  // Centering map on location if any is passed
-  let mapCenter = null;
+  // Centering map on location if any is passed and passing id to open infoWindow
+  let mapCenter = {
+    location: null,
+    id: null
+  };
   if (props.match) {
     if (props.match.params.location) {
       mapCenter = JSON.parse(props.match.params.location);
@@ -46,7 +49,9 @@ const MapContainer = props => {
         closeModal={closeModal}
         clickableIcons={false}
         // Passing center prop to map component
-        center={mapCenter}
+        center={mapCenter.location}
+        // Passing marker id to open its InfoWindow
+        markerId={mapCenter.id}
       />
     </div>
   );

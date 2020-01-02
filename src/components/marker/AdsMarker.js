@@ -1,10 +1,8 @@
-import React, { useState } from "react";
-import { Marker, InfoWindow } from "react-google-maps";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
+import React from "react";
+import { Marker } from "react-google-maps";
+// import PropTypes from "prop-types";
 
-import { deleteMarker } from "../../redux/actions/adminActions";
-import UpdateMarkerStatus from "../forms/UpdateMarkerStatusForm";
+import MarkerInfo from "./MarkerInfo";
 
 import illegal from "../../assets/marker-illegal.svg";
 import legal from "../../assets/marker-legal.svg";
@@ -15,16 +13,6 @@ import notfound from "../../assets/marker-notfound.svg";
 import question from "../../assets/marker-question.svg";
 
 const AdsMarker = props => {
-  const [infoOpen, setinfoOpen] = useState(false);
-
-  const toggleInfoOpen = () => {
-    setinfoOpen(infoOpen => !infoOpen);
-  };
-
-  const handleDeleteMarker = () => {
-    props.deleteMarker(props.marker._id);
-  };
-
   // Create marker icon
   let markerIcon;
   switch (props.marker.statusChange[props.marker.statusChange.length - 1].to) {
@@ -51,61 +39,23 @@ const AdsMarker = props => {
       break;
   }
 
+  const toogleMarker = () => {
+    if (props.markerOpened) {
+      props.openMarker("");
+    } else {
+      props.openMarker(props.marker._id);
+    }
+  };
+
   return (
     <Marker
       position={props.marker.location}
       icon={markerIcon}
-      onClick={toggleInfoOpen}
+      onClick={toogleMarker}
     >
-      {infoOpen && (
-        <InfoWindow>
-          <>
-            <p>
-              {props.marker.address &&
-                `${props.marker.address.streetName}, ${props.marker.address.streetNumber}, ${props.marker.address.neighborhood}`}
-            </p>
-
-            <img
-              src={"http://localhost:5000" + props.marker.photo}
-              alt="ad"
-              style={{ width: "200px" }}
-            />
-            {props.marker.statusChange.map((status, index) => {
-              return (
-                <p key={index}>
-                  <span>
-                    {status.to} - {status.changedAt}
-                  </span>
-                </p>
-              );
-            })}
-            {props.auth.user.role === "admin" && (
-              <>
-                <UpdateMarkerStatus
-                  id={props.marker._id}
-                  currentStatus={
-                    props.marker.statusChange[
-                      props.marker.statusChange.length - 1
-                    ].to
-                  }
-                />
-                <button onClick={handleDeleteMarker}>Видалити</button>
-              </>
-            )}
-          </>
-        </InfoWindow>
-      )}
+      {props.markerOpened && <MarkerInfo marker={props.marker} />}
     </Marker>
   );
 };
 
-AdsMarker.propTypes = {
-  deleteMarker: PropTypes.func.isRequired,
-  auth: PropTypes.object.isRequired
-};
-
-const mapStateToProps = state => ({
-  auth: state.auth
-});
-
-export default connect(mapStateToProps, { deleteMarker })(AdsMarker);
+export default AdsMarker;

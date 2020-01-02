@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { GoogleMap, withGoogleMap, withScriptjs } from "react-google-maps";
 import { connect } from "react-redux";
 
@@ -11,6 +11,12 @@ const {
 } = require("react-google-maps/lib/components/addons/MarkerClusterer");
 
 const Map = props => {
+  // Setting opened marker to empty on load or to markers id if any is passed
+  const [openedMarker, setopenedMarker] = useState(
+    props.markerId ? props.markerId : ""
+  );
+
+  // Getting markers from API
   useEffect(() => {
     props.getMarkers();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -22,11 +28,22 @@ const Map = props => {
   }, [props.markers]);
 
   const onMapClick = e => {
-    const location = {
-      lat: e.latLng.lat(),
-      lng: e.latLng.lng()
-    };
-    props.openModal(location);
+    // Opening modal for new location or if info window is opened - closing it
+    if (openedMarker === "") {
+      const location = {
+        lat: e.latLng.lat(),
+        lng: e.latLng.lng()
+      };
+      props.openModal(location);
+    } else {
+      // Closing all infowindows
+      setopenedMarker("");
+    }
+  };
+
+  // Handler that is passed to markers to open them on click
+  const openMarker = id => {
+    setopenedMarker(id);
   };
 
   // Checking if center is passed through props
@@ -51,7 +68,12 @@ const Map = props => {
     >
       <MarkerClusterer averageCenter enableRetinaIcons gridSize={60}>
         {props.markers.markers.map(marker => (
-          <AdsMarker marker={marker} key={marker._id} />
+          <AdsMarker
+            marker={marker}
+            key={marker._id}
+            markerOpened={marker._id === openedMarker}
+            openMarker={openMarker}
+          />
         ))}
       </MarkerClusterer>
     </GoogleMap>

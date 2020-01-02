@@ -53,11 +53,14 @@ const AdminVisualDataDisplay = ({
         )}
         {display === "map" && (
           <MapContainer>
-            <Link to={`/map/${JSON.stringify(location)}`} target="_blank">
+            <Link
+              to={`/map/${JSON.stringify({ location: location, id: id })}`}
+              // target="_blank"
+            >
               <MapOverlay>
                 <span>
                   Тицьніть тут, щоб відкрити на великій карті з усіма маркерами
-                  {" (у нові вкладці)"}
+                  {/* {" (у нові вкладці)"} */}
                 </span>
               </MapOverlay>
             </Link>
