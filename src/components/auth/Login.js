@@ -17,7 +17,7 @@ const Register = props => {
     <Container>
       <h1 className="display-4 text-center">Вхід у Львів без реклами</h1>
       <LoginGoogle />
-      <LoginFacebook />
+      {/* <LoginFacebook /> */}
       <LoginForm />
     </Container>
   );
