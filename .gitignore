@@ -1,4 +1,6 @@
 /src/utils/keys_dev.js
+.env.development
+.env.production
 
 # dependencies
 /node_modules
