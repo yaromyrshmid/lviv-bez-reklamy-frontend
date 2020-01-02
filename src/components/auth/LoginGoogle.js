@@ -19,7 +19,7 @@ const LoginGoogle = props => {
     <Row>
       <Col xs={12} md={8} className=" m-auto">
         <GoogleLogin
-          clientId={keys.googleLogin.clienId}
+          clientId={keys.googleLogin.clientId}
           buttonText="Вхід за допомогою Google"
           onSuccess={responseGoogle}
           onFailure={failGoogle}
