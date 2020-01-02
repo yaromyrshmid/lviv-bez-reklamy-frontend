@@ -15,6 +15,8 @@ const LoginGoogle = props => {
     console.log(response);
   };
 
+  console.log(keys.googleLogin.clientId);
+
   return (
     <Row>
       <Col xs={12} md={8} className=" m-auto">
