@@ -1,10 +1,10 @@
-const axios = require("axios");
+import axios from "axios";
 
-axios.create({
+const instance = axios.create({
   baseURL:
     process.env.NODE_ENV === "production"
       ? "https://lviv-bez-reklamy-server.herokuapp.com/"
       : "http://localhost:5000/"
 });
 
-module.exports = axios;
+export default instance;
