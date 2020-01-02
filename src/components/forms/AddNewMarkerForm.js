@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import styled from "styled-components";
 
+import { Button } from "../ui";
 import TextFieldGroup from "./fields/TextFieldGroup";
 import { postMarker } from "../../redux/actions/markerActions";
 import pointInPoligon from "../../utils/pointInPoligon";
@@ -47,22 +49,19 @@ const AddNewMarkerForm = ({ location, postMarker, errors }) => {
   };
 
   return (
-    <div>
-      <h4>Додати позначку незаконної реклами</h4>
-      <p>
-        Розташування: широта:{location.lat}, довгота:{location.lng}
-      </p>
-
+    <AddNewMarkerWrapper>
+      <h5>Додати позначку незаконної реклами</h5>
       <form onSubmit={onSubmit}>
-        <input
-          type="file"
-          name="image"
-          id="image"
-          onChange={hangleFileUpload}
-        />
-        {image.url && (
-          <img src={image.url} alt="uploaded" style={{ width: "100%" }} />
-        )}
+        <label>
+          <input
+            type="file"
+            name="image"
+            id="image"
+            onChange={hangleFileUpload}
+          />
+          <span>Завантажити зображення</span>
+        </label>
+        {image.url && <img src={image.url} alt="uploaded" />}
         <TextFieldGroup
           name="comment"
           placeholder="Коментар"
@@ -72,16 +71,53 @@ const AddNewMarkerForm = ({ location, postMarker, errors }) => {
           type="text"
         />
         {!checkMarkerInCity && <span>Точка за межами міста</span>}
-        <button
+        <Button
           type="submit"
           disabled={!checkMarkerInCity || !image.file || submitDisabled}
         >
-          Додати
-        </button>
+          <span> Додати</span>
+        </Button>
       </form>
-    </div>
+    </AddNewMarkerWrapper>
   );
 };
+
+const AddNewMarkerWrapper = styled.div`
+  padding: 1rem;
+
+  input {
+    margin-top: 1rem;
+  }
+
+  label {
+    margin-top: 0.5rem;
+  }
+
+  input[type="file"] {
+    display: none;
+  }
+
+  label span {
+    padding: 0.5rem 1rem;
+    background-color: var(--main);
+    border: 1px solid var(--main);
+    color: var(--mainWhite);
+  }
+
+  .fileinput:hover,
+  .fileinput:active,
+  .fileinput:visited,
+  .fileinput:focus {
+    text-decoration: none;
+    outline: none;
+  }
+
+  img {
+    margin-top: 1rem;
+    max-width: 100%;
+    max-height: 240px;
+  }
+`;
 
 AddNewMarkerForm.propTypes = {
   postMarker: PropTypes.func.isRequired
