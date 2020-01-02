@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { withRouter } from "react-router-dom";
+import styled from "styled-components";
 
+import { Button } from "../ui";
 import TextFieldGroup from "./fields/TextFieldGroup";
 import { registerUser } from "../../redux/actions/authActions";
 
@@ -14,12 +15,6 @@ const Registration = props => {
     password2: ""
   });
 
-  useEffect(() => {
-    if (props.auth.isAuthenticated) {
-      props.history.push("/");
-    }
-  }, [props.auth, props.history]);
-
   const onChange = e => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
@@ -30,8 +25,7 @@ const Registration = props => {
   };
 
   return (
-    <>
-      <h1 className="display-4 text-center">Реєстрація</h1>
+    <RegisterFormWrapper>
       <form onSubmit={onSubmit}>
         <TextFieldGroup
           name="name"
@@ -64,13 +58,22 @@ const Registration = props => {
           error={props.errors.password2}
           onChange={onChange}
         />
-        <button type="submit" className="btn btn-info btn-block mt-4">
-          Зареєструватись
-        </button>
+        <Button type="submit" width="10rem">
+          <span>Зареєструватись</span>
+        </Button>
       </form>
-    </>
+    </RegisterFormWrapper>
   );
 };
+
+const RegisterFormWrapper = styled.div`
+  margin: auto;
+  margin-top: 1rem;
+
+  form {
+    margin: auto;
+  }
+`;
 
 Registration.propTypes = {
   registerUser: PropTypes.func.isRequired,
@@ -79,10 +82,7 @@ Registration.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  auth: state.auth,
   errors: state.errors
 });
 
-export default connect(mapStateToProps, { registerUser })(
-  withRouter(Registration)
-);
+export default connect(mapStateToProps, { registerUser })(Registration);

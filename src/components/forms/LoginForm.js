@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { Col, Row } from "react-bootstrap";
+import styled from "styled-components";
 
+import { Button } from "../ui";
 import TextFieldGroup from "./fields/TextFieldGroup";
 import { loginUser } from "../../redux/actions/authActions";
 
@@ -22,31 +23,40 @@ const Login = props => {
   };
 
   return (
-    <Row>
-      <Col xs={12} md={8} className=" m-auto">
-        <form onSubmit={onSubmit}>
-          <TextFieldGroup
-            type="email"
-            name="email"
-            placeholder="Email Address"
-            value={form.email}
-            error={props.errors.email}
-            onChange={onChange}
-          />
-          <TextFieldGroup
-            type="password"
-            name="password"
-            placeholder="Password"
-            value={form.password}
-            error={props.errors.password}
-            onChange={onChange}
-          />
-          <input type="submit" className="btn btn-info btn-block mt-4" />
-        </form>
-      </Col>
-    </Row>
+    <LoginFormWrapper>
+      <form onSubmit={onSubmit}>
+        <TextFieldGroup
+          type="email"
+          name="email"
+          placeholder="Email"
+          value={form.email}
+          error={props.errors.email}
+          onChange={onChange}
+        />
+        <TextFieldGroup
+          type="password"
+          name="password"
+          placeholder="Пароль"
+          value={form.password}
+          error={props.errors.password}
+          onChange={onChange}
+        />
+        <Button type="submit">
+          <span>Вхід</span>
+        </Button>
+      </form>
+    </LoginFormWrapper>
   );
 };
+
+const LoginFormWrapper = styled.div`
+  margin: auto;
+  margin-top: 1rem;
+
+  form {
+    margin: auto;
+  }
+`;
 
 Login.propTypes = {
   loginUser: PropTypes.func.isRequired,

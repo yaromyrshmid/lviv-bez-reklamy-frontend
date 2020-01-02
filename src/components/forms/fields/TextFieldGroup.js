@@ -29,6 +29,8 @@ const TextFieldGroup = ({
 };
 
 const Input = styled.input`
+  padding-left: 0.5rem;
+
   &:focus {
     outline: 1px solid var(--mainDark);
   }

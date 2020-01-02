@@ -1,7 +1,7 @@
 import React from "react";
 import { GoogleLogin } from "react-google-login";
 import { connect } from "react-redux";
-import { Row, Col } from "react-bootstrap";
+import styled from "styled-components";
 
 import { googleLogin } from "../../redux/actions/authActions";
 
@@ -15,18 +15,21 @@ const LoginGoogle = props => {
   };
 
   return (
-    <Row>
-      <Col xs={12} md={8} className=" m-auto">
-        <GoogleLogin
-          clientId={process.env.REACT_APP_GOOGLE_LOGIN_CLIENT_ID}
-          buttonText="Вхід за допомогою Google"
-          onSuccess={responseGoogle}
-          onFailure={failGoogle}
-          cookiePolicy={"single_host_origin"}
-        />
-      </Col>
-    </Row>
+    <GoogleLoginWrapper>
+      <GoogleLogin
+        clientId={process.env.REACT_APP_GOOGLE_LOGIN_CLIENT_ID}
+        buttonText="Вхід за допомогою Google"
+        onSuccess={responseGoogle}
+        onFailure={failGoogle}
+        cookiePolicy={"single_host_origin"}
+      />
+    </GoogleLoginWrapper>
   );
 };
+
+const GoogleLoginWrapper = styled.div`
+  margin: auto;
+  margin-top: 1rem;
+`;
 
 export default connect(null, { googleLogin })(LoginGoogle);

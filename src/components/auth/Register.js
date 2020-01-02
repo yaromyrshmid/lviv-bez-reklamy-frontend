@@ -1,13 +1,47 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
+import { Container, Row, Col } from "react-bootstrap";
+import styled from "styled-components";
 
 import RegistrationForm from "../forms/RegistrationForm";
 
-const Register = () => {
+const Register = props => {
+  useEffect(() => {
+    if (props.auth.isAuthenticated) {
+      props.history.push("/");
+    }
+  }, [props.auth, props.history]);
+
   return (
-    <>
-      <RegistrationForm />
-    </>
+    <Container>
+      <Row>
+        <Col>
+          <RegisterWrapper>
+            <h1>Реєстрація</h1>
+            <RegistrationForm />
+          </RegisterWrapper>
+        </Col>
+      </Row>
+    </Container>
   );
 };
 
-export default Register;
+const RegisterWrapper = styled.div`
+  width: 50%;
+  margin: auto;
+  margin-top: 1rem;
+
+  h1 {
+    text-align: center;
+  }
+
+  display: flex;
+  flex-direction: column;
+`;
+
+const mapStateToPtops = state => ({
+  auth: state.auth
+});
+
+export default connect(mapStateToPtops)(withRouter(Register));

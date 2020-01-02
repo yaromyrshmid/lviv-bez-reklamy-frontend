@@ -55,9 +55,6 @@ const Navigation = props => {
                     Вхід
                   </NavLink>
                 </NavItem>
-                <NavItem>
-                  <NavLink to="/register">Реєстрація</NavLink>
-                </NavItem>
               </>
             )}
           </Nav>
