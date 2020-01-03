@@ -38,7 +38,7 @@ const UpdateMarkerStatusForm = ({
         </select>
         <Button
           type="submit"
-          disabled={newStatus === currentStatus || newStatus === ""}
+          disabled={newStatus === currentStatus.to || newStatus === ""}
         >
           <span>Змінити</span>
         </Button>
