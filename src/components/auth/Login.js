@@ -7,6 +7,7 @@ import styled from "styled-components";
 import { HR, Button } from "../ui";
 import LoginGoogle from "./LoginGoogle";
 import LoginForm from "../forms/LoginForm";
+import { clearErrors } from "../../redux/actions/errorActions";
 // import LoginFacebook from "./LoginFacebook";
 
 const Register = props => {
@@ -15,6 +16,10 @@ const Register = props => {
       props.history.push("/");
     }
   }, [props.auth, props.history]);
+
+  useEffect(() => {
+    props.clearErrors();
+  });
 
   return (
     <Container>
@@ -60,4 +65,4 @@ const mapStateToPtops = state => ({
   auth: state.auth
 });
 
-export default connect(mapStateToPtops)(withRouter(Register));
+export default connect(mapStateToPtops, { clearErrors })(withRouter(Register));

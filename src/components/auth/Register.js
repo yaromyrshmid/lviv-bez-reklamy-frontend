@@ -5,6 +5,7 @@ import { Container, Row, Col } from "react-bootstrap";
 import styled from "styled-components";
 
 import RegistrationForm from "../forms/RegistrationForm";
+import { clearErrors } from "../../redux/actions/errorActions";
 
 const Register = props => {
   useEffect(() => {
@@ -12,6 +13,10 @@ const Register = props => {
       props.history.push("/");
     }
   }, [props.auth, props.history]);
+
+  useEffect(() => {
+    props.clearErrors();
+  });
 
   return (
     <Container>
@@ -44,4 +49,4 @@ const mapStateToPtops = state => ({
   auth: state.auth
 });
 
-export default connect(mapStateToPtops)(withRouter(Register));
+export default connect(mapStateToPtops, { clearErrors })(withRouter(Register));
