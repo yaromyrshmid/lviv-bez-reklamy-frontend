@@ -38,6 +38,7 @@ const PaginationWrapper = styled.div`
     justify-content: space-between;
     list-style-type: none;
     margin-bottom: 0;
+    padding-left: 0;
   }
 
   /* Styling li*/

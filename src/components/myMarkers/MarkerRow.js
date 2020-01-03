@@ -21,10 +21,12 @@ const MarkerRow = ({ marker, user, postComment }) => {
       <MarkerRowWrapper>
         <Row>
           <Col lg={4}>
-            <StatusDisplay currentStatus={currentStatus} />
-            <AddressDisplay address={marker.address} />
-            <HR />
-            <HistoryDisplay statusChange={marker.statusChange} />
+            <GeneralDataDisplay>
+              <StatusDisplay currentStatus={currentStatus} />
+              <AddressDisplay address={marker.address} />
+              <HR />
+              <HistoryDisplay statusChange={marker.statusChange} />
+            </GeneralDataDisplay>
           </Col>
           <Col lg={8}>
             <VisualDataDisplay
@@ -44,9 +46,17 @@ const MarkerRow = ({ marker, user, postComment }) => {
 
 const MarkerRowWrapper = styled.div`
   margin-top: 1rem;
-  height: 450px;
+  max-height: 900px;
   background-color: var(--lightest);
   overflow: hidden;
+
+  @media (min-width: 992px) {
+    height: 450px;
+  }
+`;
+
+const GeneralDataDisplay = styled.div`
+  max-height: 900px;
 `;
 
 const mapStateToProps = state => ({

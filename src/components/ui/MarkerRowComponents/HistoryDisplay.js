@@ -21,10 +21,14 @@ const HistoryDisplay = ({ statusChange, admin }) => {
 const HistoryWrapper = styled.div`
   margin-top: 1rem;
   padding-left: 1rem;
-  max-height: ${props => (props.admin ? "100%" : "60%")};
+  max-height: 200px;
   overflow-y: auto;
   color: ${props => (props.admin ? "var(--mainWhite)" : "var(--main)")};
   overflow-x: hidden;
+
+  @media (min-width: 992px) {
+    max-height: ${props => (props.admin ? "100%" : "300px")};
+  }
 `;
 
 export default HistoryDisplay;

@@ -19,22 +19,14 @@ const VisualDataDisplay = ({
   return (
     <VisualDataDisplayWrapper>
       <ControlPanel>
-        <Button
-          width="100%"
-          margin="1rem 0"
-          onClick={() => setdisplay("photo")}
-        >
+        <Button margin="1rem 0" onClick={() => setdisplay("photo")}>
           <span>Фото</span>
         </Button>
-        <Button width="100%" margin="1rem 0" onClick={() => setdisplay("map")}>
+        <Button margin="1rem 0" onClick={() => setdisplay("map")}>
           <span>Карта</span>
         </Button>
         {comments.length > 0 && (
-          <Button
-            width="100%"
-            margin="1rem 0"
-            onClick={() => setdisplay("comments")}
-          >
+          <Button margin="1rem 0" onClick={() => setdisplay("comments")}>
             <span>Коментарі</span>
           </Button>
         )}
@@ -103,18 +95,49 @@ const VisualDataDisplayWrapper = styled.div`
   height: 450px;
   width: 100%;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+
+  @media (min-width: 992px) {
+    height: 450px;
+  }
+
+  @media (min-width: 1200px) {
+    flex-direction: row;
+  }
 `;
 
 const ControlPanel = styled.div`
-  height: 100%;
-  width: calc(100% - 600px);
   background-color: var(--mainDark);
+  display: flex;
+  flex-direction: row;
+  height: 40px;
+
+  button {
+    margin: 0 1rem;
+    width: 8rem;
+  }
+
+  @media (min-width: 1200px) {
+    width: calc(100% - 600px);
+    height: 100%;
+    display: block;
+
+    button {
+      margin: 1rem 0;
+      width: 100%;
+    }
+  }
 `;
 
 const DisplayArea = styled.div`
-  width: 600px;
+  width: 100%;
   background-color: var(--mainDark);
+  height: calc(100% - 40px);
+
+  @media (min-width: 1200px) {
+    height: 100%;
+    width: 600px;
+  }
 `;
 
 const ImageContainer = styled.div`
@@ -123,6 +146,7 @@ const ImageContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+  overflow: hidden;
   img {
     width: 100%;
   }
@@ -156,7 +180,7 @@ const CommentsContainer = styled.div`
   height: 100%;
   background-color: var(--lighter);
   padding: 1rem;
-  overflow-y: scroll;
+  overflow-y: auto;
 `;
 
 const CommentWrapper = styled.div`
