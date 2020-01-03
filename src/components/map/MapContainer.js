@@ -3,7 +3,8 @@ import styled from "styled-components";
 import { connect } from "react-redux";
 
 import Map from "./Map";
-import Modal from "../modal/Modal";
+import Modal from "../ui/Modal";
+import ErrorInModal from "../ui/errors/ErrorInModal";
 import Spinner from "../ui/Spinner/Spinner";
 import AddNewMarkerForm from "../forms/AddNewMarkerForm";
 
@@ -33,10 +34,15 @@ const MapContainer = props => {
 
   return (
     <div style={{ position: "relative" }}>
+      {/* Showing Modal */}
       {showModal && (
         <Modal closeModal={closeModal}>
-          <AddNewMarkerForm location={clickLocation} closeModal={closeModal} />
+          <AddNewMarkerForm location={clickLocation} />
         </Modal>
+      )}
+      {/* Showing error modal */}
+      {props.nomarkersfound && (
+        <ErrorInModal error={props.errors.nomarkersfound} />
       )}
       {props.loading && <Spinner />}
       <Map
@@ -63,7 +69,8 @@ const MapWrapper = styled.section`
 `;
 
 const MapStateToProps = state => ({
-  loading: state.markers.loading
+  loading: state.markers.loading,
+  nomarkersfound: state.errors.nomarkersfound
 });
 
 export default connect(MapStateToProps)(MapContainer);

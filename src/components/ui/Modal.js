@@ -30,7 +30,7 @@ const Backdrop = styled.div`
 `;
 
 const ModalContent = styled.div`
-  height: 30rem;
+  max-height: 30rem;
   width: 20rem;
   background-color: white;
   position: relative;

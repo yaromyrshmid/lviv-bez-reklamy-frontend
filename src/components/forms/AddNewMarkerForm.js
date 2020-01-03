@@ -2,17 +2,24 @@ import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 import { Button } from "../ui";
 import TextFieldGroup from "./fields/TextFieldGroup";
 import { postMarker } from "../../redux/actions/markerActions";
 import pointInPoligon from "../../utils/pointInPoligon";
 
-const AddNewMarkerForm = ({ location, postMarker, errors }) => {
+const AddNewMarkerForm = ({
+  location,
+  postMarker,
+  errors,
+  isAuthenticated
+}) => {
   const [comment, setcomment] = useState("");
   const [checkMarkerInCity, setcheckMarkerInCity] = useState(true);
   const [image, setimage] = useState({ file: null, url: null });
   const [submitDisabled, setsubmitDisabled] = useState(false);
+  const [checkCommentLength, setcheckCommentLength] = useState(true);
 
   useEffect(() => {
     if (pointInPoligon([location.lng, location.lat])) {
@@ -28,6 +35,9 @@ const AddNewMarkerForm = ({ location, postMarker, errors }) => {
 
   const onChange = e => {
     setcomment(e.target.value);
+    e.target.value === "" || e.target.value.length >= 4
+      ? setcheckCommentLength(true)
+      : setcheckCommentLength(false);
   };
 
   const hangleFileUpload = e => {
@@ -39,7 +49,6 @@ const AddNewMarkerForm = ({ location, postMarker, errors }) => {
   };
 
   const onSubmit = e => {
-    e.preventDefault();
     const formData = new FormData();
     formData.append("location", JSON.stringify(location));
     formData.append("comment", comment);
@@ -50,34 +59,60 @@ const AddNewMarkerForm = ({ location, postMarker, errors }) => {
 
   return (
     <AddNewMarkerWrapper>
-      <h5>Додати позначку незаконної реклами</h5>
-      <form onSubmit={onSubmit}>
-        <label>
-          <input
-            type="file"
-            name="image"
-            id="image"
-            onChange={hangleFileUpload}
-          />
-          <span>Завантажити зображення</span>
-        </label>
-        {image.url && <img src={image.url} alt="uploaded" />}
-        <TextFieldGroup
-          name="comment"
-          placeholder="Коментар"
-          value={comment}
-          error={errors.comment}
-          onChange={onChange}
-          type="text"
-        />
-        {!checkMarkerInCity && <span>Точка за межами міста</span>}
-        <Button
-          type="submit"
-          disabled={!checkMarkerInCity || !image.file || submitDisabled}
-        >
-          <span> Додати</span>
-        </Button>
-      </form>
+      {/* Check if user is authenticated */}
+      {isAuthenticated ? (
+        // Rendering form
+        <>
+          <h5>Додати позначку незаконної реклами</h5>
+          <form onSubmit={onSubmit}>
+            <label>
+              <input
+                type="file"
+                name="image"
+                id="image"
+                onChange={hangleFileUpload}
+              />
+              <span>Завантажити зображення</span>
+            </label>
+            {image.url && <img src={image.url} alt="uploaded" />}
+            <TextFieldGroup
+              name="comment"
+              placeholder="Коментар"
+              value={comment}
+              error={
+                checkCommentLength
+                  ? null
+                  : "Коментар повинен бути довшим ніж 4 символи"
+              }
+              onChange={onChange}
+              type="text"
+            />
+            {!checkMarkerInCity && <span>Помилка: Точка за межами міста</span>}
+            <Button
+              onClick={onSubmit}
+              type="submit"
+              disabled={
+                !checkMarkerInCity ||
+                !image.file ||
+                submitDisabled ||
+                !checkCommentLength
+              }
+            >
+              <span> Додати</span>
+            </Button>
+          </form>
+        </>
+      ) : (
+        // Rendering redirect to login
+        <>
+          <p>Увійдіть, щоб додати маркер</p>
+          <Link to="/login">
+            <Button margin="auto">
+              <span>Вхід</span>
+            </Button>
+          </Link>
+        </>
+      )}
     </AddNewMarkerWrapper>
   );
 };
@@ -126,7 +161,7 @@ AddNewMarkerForm.propTypes = {
 };
 
 const mapStateToPtops = state => ({
-  // auth: state.auth,
+  isAuthenticated: state.auth.isAuthenticated,
   errors: state.errors
 });
 

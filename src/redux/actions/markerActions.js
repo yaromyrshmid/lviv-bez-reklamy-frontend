@@ -10,7 +10,12 @@ export const getMarkers = () => dispatch => {
     .then(res => {
       dispatch({ type: actionTypes.GET_MARKERS, payload: res.data });
     })
-    .catch(err => dispatch({ type: actionTypes.GET_MARKERS, payload: null }));
+    .catch(err =>
+      dispatch({
+        type: actionTypes.GET_ERRORS,
+        payload: { nomarkersfound: "Маркерів не знайдено" }
+      })
+    );
 };
 
 // Post marker

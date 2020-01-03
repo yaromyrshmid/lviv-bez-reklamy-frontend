@@ -36,6 +36,11 @@ export default function(state = initialState, action) {
         ...state,
         markers: state.markers.filter(marker => marker._id !== action.payload)
       };
+    case actionTypes.GET_ERRORS:
+      return {
+        ...state,
+        loading: false
+      };
     default:
       return state;
   }
