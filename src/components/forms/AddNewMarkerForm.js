@@ -43,7 +43,6 @@ const AddNewMarkerForm = ({
 
   const onSubmit = e => {
     e.preventDefault();
-    console.log(document.getElementsByName("filepond")[0].value);
     postMarker({
       location,
       comment,
