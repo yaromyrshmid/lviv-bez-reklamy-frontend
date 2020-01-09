@@ -48,7 +48,7 @@ const AdminVisualDataDisplay = ({
       <DisplayArea>
         {display === "photo" && (
           <ImageContainer>
-            <img src={"http://localhost:5000" + photo} alt="ad on the street" />
+            <img src={photo} alt="ad on the street" />
           </ImageContainer>
         )}
         {display === "map" && (

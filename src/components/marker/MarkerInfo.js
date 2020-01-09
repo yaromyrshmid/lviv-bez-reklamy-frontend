@@ -1,14 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { InfoWindow } from "react-google-maps";
 import styled from "styled-components";
 import { connect } from "react-redux";
 
-import { Button } from "../ui";
+import { Button, Spinner } from "../ui";
 import { HistoryDisplay } from "../ui/MarkerRowComponents";
 import UpdateMarkerStatus from "../forms/UpdateMarkerStatusForm";
+import { getMarkerPhoto } from "../../redux/actions/markerActions";
 import { deleteMarker } from "../../redux/actions/adminActions";
 
-const MarkerInfo = ({ marker, deleteMarker, auth }) => {
+const MarkerInfo = ({ marker, deleteMarker, auth, getMarkerPhoto }) => {
   const address = marker.address;
   const displayedAdress =
     address &&
@@ -16,13 +17,26 @@ const MarkerInfo = ({ marker, deleteMarker, auth }) => {
       address.streetNumber ? address.streetNumber + ", " : ""
     }${address.neighborhood ? address.neighborhood : ""}`;
 
+  useEffect(() => {
+    if (!marker.virtualPhoto) {
+      getMarkerPhoto(marker._id);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <InfoWindow>
       <InfoWrapper>
         <div className="titleWrapper">
           <h6>{displayedAdress}</h6>
         </div>
-        <img src={"http://localhost:5000" + marker.photo} alt="ad" />
+        <ImageContainer>
+          {marker.virtualPhoto ? (
+            <img src={marker.virtualPhoto} alt="ad" />
+          ) : (
+            <Spinner />
+          )}
+        </ImageContainer>
         <HistoryDisplay statusChange={marker.statusChange} />
         {auth.user.role === "admin" && (
           <AdminControls>
@@ -68,8 +82,15 @@ const DeleteButtonWrapper = styled.div`
   padding-left: 1rem;
 `;
 
+const ImageContainer = styled.div`
+  position: relative;
+  min-height: 225px;
+`;
+
 const mapStateToProps = state => ({
   auth: state.auth
 });
 
-export default connect(mapStateToProps, { deleteMarker })(MarkerInfo);
+export default connect(mapStateToProps, { deleteMarker, getMarkerPhoto })(
+  MarkerInfo
+);

@@ -30,7 +30,7 @@ const MarkerRow = ({ marker, user, postComment }) => {
           </Col>
           <Col lg={8}>
             <VisualDataDisplay
-              photo={marker.photo}
+              photo={marker.virtualPhoto}
               location={marker.location}
               id={marker._id}
               postComment={postComment}

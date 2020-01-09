@@ -54,7 +54,7 @@ const MarkerRow = ({
           </Col>
           <Col lg={8}>
             <AdminVisualDataDisplay
-              photo={marker.photo}
+              photo={marker.virtualPhoto}
               location={marker.location}
               id={marker._id}
               postComment={postAdminComment}

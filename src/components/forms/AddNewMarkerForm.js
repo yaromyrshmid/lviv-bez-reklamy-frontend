@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 
 import { Button } from "../ui";
 import TextFieldGroup from "./fields/TextFieldGroup";
+import FilePondImage from "./fields/FilePondImage";
 import { postMarker } from "../../redux/actions/markerActions";
 import pointInPoligon from "../../utils/pointInPoligon";
 
@@ -17,7 +18,7 @@ const AddNewMarkerForm = ({
 }) => {
   const [comment, setcomment] = useState("");
   const [checkMarkerInCity, setcheckMarkerInCity] = useState(true);
-  const [image, setimage] = useState({ file: null, url: null });
+  const [image, setimage] = useState(null);
   const [submitDisabled, setsubmitDisabled] = useState(false);
   const [checkCommentLength, setcheckCommentLength] = useState(true);
 
@@ -40,20 +41,14 @@ const AddNewMarkerForm = ({
       : setcheckCommentLength(false);
   };
 
-  const hangleFileUpload = e => {
-    let adress = URL.createObjectURL(e.target.files[0]);
-    setimage({
-      file: e.target.files[0],
-      url: adress
-    });
-  };
-
   const onSubmit = e => {
-    const formData = new FormData();
-    formData.append("location", JSON.stringify(location));
-    formData.append("comment", comment);
-    formData.append("image", image.file);
-    postMarker(formData);
+    e.preventDefault();
+    console.log(document.getElementsByName("filepond")[0].value);
+    postMarker({
+      location,
+      comment,
+      image
+    });
     setsubmitDisabled(true);
   };
 
@@ -65,7 +60,7 @@ const AddNewMarkerForm = ({
         <>
           <h5>Додати позначку незаконної реклами</h5>
           <form onSubmit={onSubmit}>
-            <label>
+            {/* <label>
               <input
                 type="file"
                 name="image"
@@ -73,8 +68,9 @@ const AddNewMarkerForm = ({
                 onChange={hangleFileUpload}
               />
               <span>Завантажити зображення</span>
-            </label>
-            {image.url && <img src={image.url} alt="uploaded" />}
+            </label> */}
+            <FilePondImage setimages={setimage} images={image} />
+            {/* {image.url && <img src={image.url} alt="uploaded" />} */}
             <TextFieldGroup
               name="comment"
               placeholder="Коментар"
@@ -93,7 +89,7 @@ const AddNewMarkerForm = ({
               type="submit"
               disabled={
                 !checkMarkerInCity ||
-                !image.file ||
+                !image ||
                 submitDisabled ||
                 !checkCommentLength
               }

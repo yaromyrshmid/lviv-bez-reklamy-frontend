@@ -18,14 +18,22 @@ export const getMarkers = () => dispatch => {
     );
 };
 
+// Get marker photo
+export const getMarkerPhoto = id => dispatch => {
+  axios
+    .get(`/api/markers/byId/${id}`)
+    .then(res => {
+      dispatch({ type: actionTypes.UPDATE_MARKER, payload: res.data });
+    })
+    .catch(err => {
+      dispatch({ type: actionTypes.GET_ERRORS, payload: err.response.data });
+    });
+};
+
 // Post marker
 export const postMarker = postData => dispatch => {
   axios
-    .post("/api/markers", postData, {
-      headers: {
-        "content-type": "multipart/form-data"
-      }
-    })
+    .post("/api/markers", postData)
     .then(res => dispatch({ type: actionTypes.POST_MARKER, payload: res.data }))
     .catch(err => {
       dispatch({ type: actionTypes.GET_ERRORS, payload: err.response.data });
