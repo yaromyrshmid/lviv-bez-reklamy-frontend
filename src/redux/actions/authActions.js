@@ -8,7 +8,32 @@ import * as actionTypes from "../actions/types";
 export const registerUser = (userData, history) => dispatch => {
   axios
     .post("/api/users/register", userData)
-    .then(res => history.push("/"))
+    .then(res => {
+      history.push("/registersuccess");
+    })
+    .catch(err => {
+      dispatch({
+        type: actionTypes.GET_ERRORS,
+        payload: err.response.data
+      });
+    });
+};
+
+// Email confirmation
+export const confirmEmail = emailConfirmationToken => dispatch => {
+  axios
+    .post(`/api/users/confirmemail/${emailConfirmationToken}`)
+    .then(res => {
+      // Save to local storage
+      const { token } = res.data;
+      localStorage.setItem("jwtToken", token);
+      // Set token to Auth header
+      setAuthToken(token);
+      // Decode token to get user data
+      const decoded = jwt_decode(token);
+      // Set current user
+      dispatch(setCurrentUser(decoded));
+    })
     .catch(err =>
       dispatch({
         type: actionTypes.GET_ERRORS,

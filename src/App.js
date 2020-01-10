@@ -15,6 +15,8 @@ import Layout from "./components/layout/Layout";
 import MapContainer from "./components/map/MapContainer";
 import Landing from "./components/landing/Landing";
 import Register from "./components/auth/Register";
+import RegisterSuccess from "./components/auth/RegisterSuccess";
+import ConfirmEmail from "./components/auth/ConfirmEmail";
 import Login from "./components/auth/Login";
 import MyMarkers from "./components/myMarkers/MyMarkers";
 import AdminMarkers from "./components/adminMarkers/AdminMarkers";
@@ -47,6 +49,12 @@ function App() {
           <Switch>
             <Route exact path="/" component={Landing} />
             <Route exact path="/register" component={Register} />
+            <Route exact path="/registersuccess" component={RegisterSuccess} />
+            <Route
+              exact
+              path="/confirmemail/:emailConfirmationToken"
+              component={ConfirmEmail}
+            />
             <Route exact path="/login" component={Login} />
             <PrivateRoute exact path="/mymarkers" component={MyMarkers} />
             <PrivateRoute

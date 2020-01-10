@@ -11,7 +11,7 @@ import LoginForm from "../forms/LoginForm";
 import { clearErrors } from "../../redux/actions/errorActions";
 // import LoginFacebook from "./LoginFacebook";
 
-const Register = props => {
+const Login = props => {
   useEffect(() => {
     if (props.auth.isAuthenticated) {
       props.history.push("/");
@@ -69,4 +69,4 @@ const mapStateToPtops = state => ({
   auth: state.auth
 });
 
-export default connect(mapStateToPtops, { clearErrors })(withRouter(Register));
+export default connect(mapStateToPtops, { clearErrors })(withRouter(Login));

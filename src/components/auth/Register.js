@@ -28,7 +28,7 @@ const Register = props => {
         <Col>
           <RegisterWrapper>
             <h1>Реєстрація</h1>
-            <RegistrationForm />
+            <RegistrationForm history={props.history} />
           </RegisterWrapper>
         </Col>
       </Row>
