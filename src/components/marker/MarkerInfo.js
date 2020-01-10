@@ -27,9 +27,7 @@ const MarkerInfo = ({ marker, deleteMarker, auth, getMarkerPhoto }) => {
   return (
     <InfoWindow>
       <InfoWrapper>
-        <div className="titleWrapper">
-          <h6>{displayedAdress}</h6>
-        </div>
+        <h6>{displayedAdress}</h6>
         <ImageContainer>
           {marker.virtualPhoto ? (
             <img src={marker.virtualPhoto} alt="ad" />
@@ -65,9 +63,6 @@ const MarkerInfo = ({ marker, deleteMarker, auth, getMarkerPhoto }) => {
 
 const InfoWrapper = styled.div`
   max-width: 400px;
-  .titleWrapper {
-    padding: 0 1rem;
-  }
 
   img {
     width: 100%;
