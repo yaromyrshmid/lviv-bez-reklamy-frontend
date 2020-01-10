@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { Container, Row, Col } from "react-bootstrap";
 import styled from "styled-components";
+import { Helmet } from "react-helmet";
 
 import RegistrationForm from "../forms/RegistrationForm";
 import { clearErrors } from "../../redux/actions/errorActions";
@@ -20,6 +21,9 @@ const Register = props => {
 
   return (
     <Container>
+      <Helmet>
+        <title>Реєстрація | Львів без реклами</title>
+      </Helmet>
       <Row>
         <Col>
           <RegisterWrapper>

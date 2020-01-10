@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { withRouter, Link } from "react-router-dom";
 import { Container, Row, Col } from "react-bootstrap";
 import styled from "styled-components";
+import { Helmet } from "react-helmet";
 
 import { HR, Button } from "../ui";
 import LoginGoogle from "./LoginGoogle";
@@ -23,6 +24,9 @@ const Register = props => {
 
   return (
     <Container>
+      <Helmet>
+        <title>Вхід | Львів без реклами</title>
+      </Helmet>
       <Row>
         <Col>
           <LoginWrapper>

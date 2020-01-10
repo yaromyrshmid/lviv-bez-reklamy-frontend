@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import { connect } from "react-redux";
+import { Helmet } from "react-helmet";
 
 import MarkerRow from "./MarkerRow";
 import { Filter, Spinner, Pagination, NotFoundMessage } from "../ui";
@@ -46,6 +47,9 @@ const MarkersTable = props => {
 
   return (
     <Container>
+      <Helmet>
+        <title>Мої маркери | Львів без реклами</title>
+      </Helmet>
       <Row>
         <Col>
           <Filter

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { Container, Row, Col } from "react-bootstrap";
+import { Helmet } from "react-helmet";
 
 import { Filter, Spinner, Pagination, NotFoundMessage, Calendar } from "../ui";
 import AdminMarkerRow from "./AdminMarkerRow";
@@ -27,6 +28,9 @@ const AdminMarkers = props => {
 
   return (
     <Container>
+      <Helmet>
+        <title>Усі маркери | Львів без реклами</title>
+      </Helmet>
       <Row>
         <Col>
           <Filter
