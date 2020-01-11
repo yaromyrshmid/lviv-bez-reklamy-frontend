@@ -5,8 +5,8 @@ import { Container, Row, Col } from "react-bootstrap";
 import styled from "styled-components";
 import { Helmet } from "react-helmet";
 
-import RegistrationForm from "../forms/RegistrationForm";
-import { clearErrors } from "../../redux/actions/errorActions";
+import RegistrationForm from "../../forms/RegistrationForm";
+import { clearErrors } from "../../../redux/actions/errorActions";
 
 const Register = props => {
   useEffect(() => {

@@ -3,7 +3,7 @@ import { GoogleLogin } from "react-google-login";
 import { connect } from "react-redux";
 import styled from "styled-components";
 
-import { googleLogin } from "../../redux/actions/authActions";
+import { googleLogin } from "../../../redux/actions/authActions";
 
 const LoginGoogle = props => {
   const responseGoogle = response => {

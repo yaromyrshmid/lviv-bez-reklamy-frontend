@@ -5,7 +5,7 @@ import { Helmet } from "react-helmet";
 import styled from "styled-components";
 import { connect } from "react-redux";
 
-import { confirmEmail } from "../../redux/actions/authActions";
+import { confirmEmail } from "../../../redux/actions/authActions";
 
 const ConfirmEmail = props => {
   useEffect(() => {

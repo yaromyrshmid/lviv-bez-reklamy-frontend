@@ -65,6 +65,39 @@ export const loginUser = userData => dispatch => {
     );
 };
 
+// Forgot password - Send link to email to set new password
+export const forgotPassword = (email, setsuccess) => dispatch => {
+  axios
+    .post("/api/users/forgotpassword", { email: email })
+    .then(res => {
+      // history.push("/forgotpasswordlinksent");
+      setsuccess(true);
+    })
+    .catch(err =>
+      dispatch({
+        type: actionTypes.GET_ERRORS,
+        payload: err.response.data
+      })
+    );
+};
+
+// Set new password after forgot password
+export const setNewPassword = (
+  passwords,
+  passwordResetToken,
+  setsuccess
+) => dispatch => {
+  axios
+    .post(`/api/users/resetpassword/${passwordResetToken}`, passwords)
+    .then(res => setsuccess(true))
+    .catch(err =>
+      dispatch({
+        type: actionTypes.GET_ERRORS,
+        payload: err.response.data
+      })
+    );
+};
+
 // Login - google
 export const googleLogin = token => dispatch => {
   axios
@@ -88,7 +121,7 @@ export const googleLogin = token => dispatch => {
     );
 };
 
-// Login - google
+// Login - facebook
 export const facebookLogin = token => dispatch => {
   axios.post("/api/facebook/", { id_token: token });
   //   .then(res => {

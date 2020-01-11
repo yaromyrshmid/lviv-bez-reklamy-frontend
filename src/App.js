@@ -14,10 +14,12 @@ import AdminRoute from "./components/common/AdminRoute";
 import Layout from "./components/layout/Layout";
 import MapContainer from "./components/map/MapContainer";
 import Landing from "./components/landing/Landing";
-import Register from "./components/auth/Register";
-import RegisterSuccess from "./components/auth/RegisterSuccess";
-import ConfirmEmail from "./components/auth/ConfirmEmail";
-import Login from "./components/auth/Login";
+import Register from "./components/auth/register/Register";
+import RegisterSuccess from "./components/auth/register/RegisterSuccess";
+import ConfirmEmail from "./components/auth/register/ConfirmEmail";
+import Login from "./components/auth/login/Login";
+import ForgotPassword from "./components/auth/forgotPassword/ForgotPassword";
+import SetNewPassword from "./components/auth/forgotPassword/SetNewPassword";
 import MyMarkers from "./components/myMarkers/MyMarkers";
 import AdminMarkers from "./components/adminMarkers/AdminMarkers";
 import PageNotFound from "./components/404/PageNotFound";
@@ -56,6 +58,12 @@ function App() {
               component={ConfirmEmail}
             />
             <Route exact path="/login" component={Login} />
+            <Route exact path="/forgotpassword" component={ForgotPassword} />
+            <Route
+              exact
+              path="/setnewpassword/:passwordResetToken"
+              component={SetNewPassword}
+            />
             <PrivateRoute exact path="/mymarkers" component={MyMarkers} />
             <PrivateRoute
               exact

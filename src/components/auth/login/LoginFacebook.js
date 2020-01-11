@@ -3,7 +3,7 @@ import FacebookLogin from "react-facebook-login";
 import { connect } from "react-redux";
 import { Row, Col } from "react-bootstrap";
 
-import { facebookLogin } from "../../redux/actions/authActions";
+import { facebookLogin } from "../../../redux/actions/authActions";
 
 const LoginFacebook = props => {
   const responseFacebook = response => {

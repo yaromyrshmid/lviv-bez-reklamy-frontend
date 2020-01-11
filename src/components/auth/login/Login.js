@@ -5,10 +5,10 @@ import { Container, Row, Col } from "react-bootstrap";
 import styled from "styled-components";
 import { Helmet } from "react-helmet";
 
-import { HR, Button } from "../ui";
+import { HR, Button } from "../../ui";
 import LoginGoogle from "./LoginGoogle";
-import LoginForm from "../forms/LoginForm";
-import { clearErrors } from "../../redux/actions/errorActions";
+import LoginForm from "../../forms/LoginForm";
+import { clearErrors } from "../../../redux/actions/errorActions";
 // import LoginFacebook from "./LoginFacebook";
 
 const Login = props => {
@@ -35,9 +35,12 @@ const Login = props => {
             <HR />
             {/* <LoginFacebook /> */}
             <LoginForm />
+            <Link to="/forgotpassword" className="secondary">
+              <p>Якщо пароль забуто</p>
+            </Link>
             <HR />
             <Link to="/register">
-              <Button>
+              <Button margin="1rem auto">
                 <span>Реєстрація</span>
               </Button>
             </Link>
@@ -53,12 +56,18 @@ const LoginWrapper = styled.div`
   margin: auto;
   margin-top: 1rem;
 
-  h1 {
-    text-align: center;
+  .secondary {
+    margin: auto;
+    margin-top: 0.5rem;
+
+    p {
+      margin-bottom: 0rem;
+      color: var(--main);
+    }
   }
 
-  a {
-    margin: 1rem auto;
+  h1 {
+    text-align: center;
   }
 
   display: flex;
