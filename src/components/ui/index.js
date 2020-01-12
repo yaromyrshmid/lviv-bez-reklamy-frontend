@@ -7,6 +7,8 @@ import HR from "./HR";
 import NotFoundMessage from "./NotFoundMessage";
 import Calendar from "./Calendar";
 import Modal from "./Modal";
+import ErrorsGeneral from "./errors/ErrorsGeneral";
+import ErrorsSpecific from "./errors/ErrorsSpecific";
 
 export {
   Button,
@@ -17,5 +19,7 @@ export {
   HR,
   NotFoundMessage,
   Calendar,
-  Modal
+  Modal,
+  ErrorsGeneral,
+  ErrorsSpecific
 };

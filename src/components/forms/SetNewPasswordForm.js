@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import styled from "styled-components";
 import { withRouter } from "react-router-dom";
 
-import { Button } from "../ui";
+import { Button, ErrorsGeneral, ErrorsSpecific } from "../ui";
 import TextFieldGroup from "./fields/TextFieldGroup";
 import { setNewPassword } from "../../redux/actions/authActions";
 
@@ -49,6 +49,8 @@ const SetNewPasswordForm = props => {
         <Button type="submit" width="10rem">
           <span>Змінити пароль</span>
         </Button>
+        <ErrorsGeneral />
+        <ErrorsSpecific errors={[props.errors.user]} />
       </form>
     </FormWrapper>
   );

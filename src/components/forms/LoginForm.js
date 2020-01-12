@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import styled from "styled-components";
 
-import { Button } from "../ui";
+import { Button, ErrorsGeneral } from "../ui";
 import TextFieldGroup from "./fields/TextFieldGroup";
 import { loginUser } from "../../redux/actions/authActions";
 
@@ -44,6 +44,7 @@ const Login = props => {
         <Button type="submit">
           <span>Вхід</span>
         </Button>
+        <ErrorsGeneral />
       </form>
     </LoginFormWrapper>
   );
@@ -63,8 +64,8 @@ Login.propTypes = {
   errors: PropTypes.object.isRequired
 };
 
-const mapStateToPtops = state => ({
+const mapStateToProps = state => ({
   errors: state.errors
 });
 
-export default connect(mapStateToPtops, { loginUser })(Login);
+export default connect(mapStateToProps, { loginUser })(Login);

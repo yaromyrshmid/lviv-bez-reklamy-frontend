@@ -4,7 +4,7 @@ import { withRouter } from "react-router-dom";
 
 import { forgotPassword } from "../../redux/actions/authActions";
 import TextFieldGroup from "./fields/TextFieldGroup";
-import { Button } from "../ui";
+import { Button, ErrorsGeneral } from "../ui";
 
 const ForgotPasswordForm = props => {
   const [email, setemail] = useState("");
@@ -31,6 +31,7 @@ const ForgotPasswordForm = props => {
       <Button type="submit" disabled={email.length < 5}>
         <span>Відправити</span>
       </Button>
+      <ErrorsGeneral />
     </form>
   );
 };

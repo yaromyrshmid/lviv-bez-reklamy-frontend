@@ -5,6 +5,7 @@ import { Helmet } from "react-helmet";
 import styled from "styled-components";
 import { connect } from "react-redux";
 
+import { ErrorsGeneral } from "../../ui";
 import { confirmEmail } from "../../../redux/actions/authActions";
 
 const ConfirmEmail = props => {
@@ -31,6 +32,7 @@ const ConfirmEmail = props => {
               <>
                 <h4>{props.errors.user} </h4>
                 <h4>{props.errors.email} </h4>
+                <ErrorsGeneral />
               </>
             ) : (
               <h1>Дякуємо! Електронна адреса підтверджена</h1>
