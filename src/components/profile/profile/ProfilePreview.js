@@ -5,8 +5,8 @@ import { Row, Col } from "react-bootstrap";
 
 import ProfileImage from "./ProfileImage";
 import ProfileInfo from "./ProfileInfo";
-import { Spinner, ErrorsSpecific, ErrorsGeneral } from "../ui";
-import { getUserProfile } from "../../redux/actions/profileActions";
+import { Spinner, ErrorsSpecific, ErrorsGeneral } from "../../ui";
+import { getUserProfile } from "../../../redux/actions/profileActions";
 
 const ProfilePreview = props => {
   useEffect(() => {

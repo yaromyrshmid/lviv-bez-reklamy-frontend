@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { Col } from "react-bootstrap";
 
-import { Button } from "../ui";
-import photoplaceholder from "../../assets/userphotoplaceholder.png";
-import ChangeProfilePhoto from "../forms/profileForms/ChangeProfilePhoto";
+import { Button } from "../../ui";
+import photoplaceholder from "../../../assets/userphotoplaceholder.png";
+import ChangeProfilePhoto from "../../forms/profileForms/ChangeProfilePhoto";
 
 const ProfileImage = ({ photo }) => {
   const [showChangePhoto, setshowChangePhoto] = useState(false);

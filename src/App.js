@@ -22,7 +22,8 @@ import ForgotPassword from "./components/auth/forgotPassword/ForgotPassword";
 import SetNewPassword from "./components/auth/forgotPassword/SetNewPassword";
 import MyMarkers from "./components/myMarkers/MyMarkers";
 import AdminMarkers from "./components/adminMarkers/AdminMarkers";
-import Profile from "./components/profile/Profile";
+import Profile from "./components/profile/profile/Profile";
+import Settings from "./components/profile/settings/Settings";
 import PageNotFound from "./components/404/PageNotFound";
 
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -66,6 +67,7 @@ function App() {
               component={SetNewPassword}
             />
             <PrivateRoute exact path="/profile" component={Profile} />
+            <PrivateRoute exact path="/settings" component={Settings} />
             <PrivateRoute exact path="/mymarkers" component={MyMarkers} />
             <PrivateRoute
               exact

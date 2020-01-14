@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { Col } from "react-bootstrap";
 
-import ChangeName from "../forms/profileForms/ChangeName";
-import ChangeEmail from "../forms/profileForms/ChangeEmail";
+import ChangeName from "../../forms/profileForms/ChangeName";
+import ChangeEmail from "../../forms/profileForms/ChangeEmail";
 
 const ProfileInfo = ({ name, email }) => {
   const [editing, setediting] = useState(false);

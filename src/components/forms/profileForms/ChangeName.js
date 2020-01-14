@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import styled from "styled-components";
 
 import TextFieldGroup from "../fields/TextFieldGroup";
-import { Button, ErrorsGeneral, ErrorsSpecific } from "../../ui";
+import { Button, ErrorsGeneral } from "../../ui";
 import { changeName } from "../../../redux/actions/profileActions";
 
 const ChangeName = props => {
