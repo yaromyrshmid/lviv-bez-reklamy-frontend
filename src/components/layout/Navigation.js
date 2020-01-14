@@ -37,6 +37,9 @@ const Navigation = props => {
                 <NavItem>
                   <NavLink to="/mymarkers">Мої маркери</NavLink>
                 </NavItem>
+                <NavItem>
+                  <NavLink to="/profile">Профіль</NavLink>
+                </NavItem>
                 <Button
                   empty
                   onClick={() => {

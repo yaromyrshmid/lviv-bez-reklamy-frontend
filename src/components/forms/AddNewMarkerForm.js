@@ -59,17 +59,7 @@ const AddNewMarkerForm = ({
         <>
           <h5>Додати позначку незаконної реклами</h5>
           <form onSubmit={onSubmit}>
-            {/* <label>
-              <input
-                type="file"
-                name="image"
-                id="image"
-                onChange={hangleFileUpload}
-              />
-              <span>Завантажити зображення</span>
-            </label> */}
-            <FilePondImage setimages={setimage} images={image} />
-            {/* {image.url && <img src={image.url} alt="uploaded" />} */}
+            <FilePondImage setimages={setimage} resizeWidth={600} />
             <TextFieldGroup
               name="comment"
               placeholder="Коментар"

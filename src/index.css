@@ -26,6 +26,18 @@
   --fontText: "Fira Sans Extra Condensed", sans-serif;
 }
 
+.text-main {
+  color: var(--main);
+}
+
+.text-mainDark {
+  color: var(--mainDark);
+}
+
+.text-lighter {
+  color: var(--lighter);
+}
+
 /* Animations */
 
 @keyframes flip-horizontal-top {

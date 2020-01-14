@@ -15,7 +15,7 @@ registerPlugin(
   FilePondPluginFileEncode
 );
 
-const FilePondImage = ({ setimages }) => {
+const FilePondImage = ({ setimages, resizeWidth }) => {
   return (
     <div>
       <FilePond
@@ -25,7 +25,7 @@ const FilePondImage = ({ setimages }) => {
         }}
         // files={images}
         acceptedFileTypes={["image/*"]}
-        imageResizeTargetWidth={600}
+        imageResizeTargetWidth={resizeWidth}
         instantUpload={false}
         labelIdle={
           'Перетягніть фото або <span class="filepond--label-action">Оберіть</span>'
