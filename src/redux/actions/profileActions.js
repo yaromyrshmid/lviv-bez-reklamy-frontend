@@ -77,6 +77,17 @@ export const changeName = name => dispatch => {
     });
 };
 
+// Change password
+export const changePassword = (userData, callback) => dispatch => {
+  dispatch(setProfileLoading());
+  axios
+    .post("/api/profile/password", userData)
+    .then(res => callback())
+    .catch(err => {
+      dispatch(getErrors(err));
+    });
+};
+
 // Set loading state
 export const setProfileLoading = () => {
   return {

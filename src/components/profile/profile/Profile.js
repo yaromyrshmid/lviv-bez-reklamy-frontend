@@ -14,6 +14,7 @@ const Profile = () => {
         </Col>
         <Col lg={10} xl={11}>
           <WorkingArea>
+            <h1>Профіль</h1>
             <ProfilePreview />
           </WorkingArea>
         </Col>

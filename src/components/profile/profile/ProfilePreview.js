@@ -16,7 +16,6 @@ const ProfilePreview = props => {
 
   return (
     <div>
-      <h1>Профіль</h1>
       {props.loading ? (
         <Spinner />
       ) : (
@@ -38,9 +37,7 @@ const ProfilePreview = props => {
   );
 };
 
-const Wrapper = styled(Row)`
-  margin-top: 1rem;
-`;
+const Wrapper = styled(Row)``;
 
 const mapStateToProps = state => ({
   profile: state.profile.profile,
