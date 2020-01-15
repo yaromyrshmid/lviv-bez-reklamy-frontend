@@ -7,12 +7,12 @@ import {
   VisualDataDisplay,
   StatusDisplay,
   AddressDisplay,
-  HistoryDisplay
+  CollectSilver
 } from "../ui/MarkerRowComponents";
 import { HR } from "../ui";
 import { postComment } from "../../redux/actions/markerActions";
 
-const MarkerRow = ({ marker, user, postComment }) => {
+const MarkerRow = ({ marker, user, postComment, collectSilver }) => {
   // Getting current status of marker
   const currentStatus = marker.statusChange[marker.statusChange.length - 1];
 
@@ -25,7 +25,11 @@ const MarkerRow = ({ marker, user, postComment }) => {
               <StatusDisplay currentStatus={currentStatus} />
               <AddressDisplay address={marker.address} />
               <HR />
-              <HistoryDisplay statusChange={marker.statusChange} />
+              <CollectSilver
+                markerId={marker._id}
+                silverAllocated={marker.silverAllocated}
+                silverCollected={marker.silverCollected}
+              />
             </GeneralDataDisplay>
           </Col>
           <Col lg={8}>
@@ -36,6 +40,7 @@ const MarkerRow = ({ marker, user, postComment }) => {
               postComment={postComment}
               user={user}
               comments={marker.comments}
+              statusChange={marker.statusChange}
             />
           </Col>
         </Row>

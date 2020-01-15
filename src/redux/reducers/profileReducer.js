@@ -3,7 +3,8 @@ import * as actionTypes from "../actions/types";
 const initialState = {
   userMarkers: [],
   profile: null,
-  loading: true
+  loading: true,
+  silver: null
 };
 
 export default function(state = initialState, action) {
@@ -40,6 +41,11 @@ export default function(state = initialState, action) {
         },
         loading: false
       };
+    case actionTypes.GET_SILVER:
+      return {
+        ...state,
+        silver: action.payload
+      };
     case actionTypes.PROFILE_LOADING:
       return {
         ...state,
@@ -54,7 +60,8 @@ export default function(state = initialState, action) {
       return {
         ...state,
         profile: null,
-        userMarkers: []
+        userMarkers: [],
+        silver: null
       };
     case actionTypes.GET_ERRORS:
       return {
