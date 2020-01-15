@@ -23,7 +23,6 @@ const MarkerInfo = ({ marker, deleteMarker, auth, getMarkerPhoto }) => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
   return (
     <InfoWindow>
       <InfoWrapper>
