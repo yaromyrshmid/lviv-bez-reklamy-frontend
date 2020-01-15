@@ -4,14 +4,15 @@ import { connect } from "react-redux";
 import styled from "styled-components";
 import { withRouter } from "react-router-dom";
 
-import { Button, ErrorsGeneral, ErrorsSpecific } from "../ui";
-import TextFieldGroup from "./fields/TextFieldGroup";
-import { setNewPassword } from "../../redux/actions/authActions";
+import { Button, ErrorsGeneral, ErrorsSpecific } from "../../ui";
+import TextFieldGroup from "../fields/TextFieldGroup";
+import { changePassword } from "../../../redux/actions/profileActions";
 
-const SetNewPasswordForm = props => {
+const ChangePasswordForm = props => {
   const [form, setForm] = useState({
     password: "",
-    password2: ""
+    newpassword: "",
+    newpassword2: ""
   });
 
   const onChange = e => {
@@ -20,11 +21,7 @@ const SetNewPasswordForm = props => {
 
   const onSubmit = e => {
     e.preventDefault();
-    props.setNewPassword(
-      form,
-      props.match.params.passwordResetToken,
-      props.callback
-    );
+    props.changePassword(form, props.callback);
   };
 
   return (
@@ -33,17 +30,25 @@ const SetNewPasswordForm = props => {
         <TextFieldGroup
           type="password"
           name="password"
-          placeholder="Новий пароль"
+          placeholder="Старий пароль"
           value={form.password}
           error={props.errors.password}
           onChange={onChange}
         />
         <TextFieldGroup
           type="password"
-          name="password2"
-          placeholder="Повторіть пароль"
-          value={form.password2}
-          error={props.errors.password2}
+          name="newpassword"
+          placeholder="Новий пароль"
+          value={form.newpassword}
+          error={props.errors.newpassword}
+          onChange={onChange}
+        />
+        <TextFieldGroup
+          type="password"
+          name="newpassword2"
+          placeholder="Повторіть новий пароль"
+          value={form.newpassword2}
+          error={props.errors.newpassword2}
           onChange={onChange}
         />
         <Button type="submit" width="10rem">
@@ -65,8 +70,8 @@ const FormWrapper = styled.div`
   }
 `;
 
-SetNewPasswordForm.propTypes = {
-  registerUser: PropTypes.func.isRequired,
+ChangePasswordForm.propTypes = {
+  changePassword: PropTypes.func.isRequired,
   // auth: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired
 };
@@ -75,6 +80,6 @@ const mapStateToProps = state => ({
   errors: state.errors
 });
 
-export default connect(mapStateToProps, { setNewPassword })(
-  withRouter(SetNewPasswordForm)
+export default connect(mapStateToProps, { changePassword })(
+  withRouter(ChangePasswordForm)
 );

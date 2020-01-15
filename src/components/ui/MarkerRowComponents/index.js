@@ -4,6 +4,7 @@ import StatusDisplay from "./StatusDisplay";
 import AddressDisplay from "./AddressDisplay";
 import HistoryDisplay from "./HistoryDisplay";
 import UserDisplay from "./UserDisplay";
+import CollectSilver from "./CollectSilver";
 
 export {
   VisualDataDisplay,
@@ -11,5 +12,6 @@ export {
   AddressDisplay,
   HistoryDisplay,
   AdminVisualDataDisplay,
-  UserDisplay
+  UserDisplay,
+  CollectSilver
 };

@@ -37,7 +37,7 @@ const MarkerRow = ({
             <HR />
             <UpdateMarkerStatusForm
               id={marker._id}
-              currentStatus={currentStatus}
+              currentStatus={currentStatus.to}
             />
             <HR />
             <UserDisplay user={marker.user} banUser={banUser} />

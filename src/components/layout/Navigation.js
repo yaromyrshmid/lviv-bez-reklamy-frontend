@@ -6,6 +6,7 @@ import styled from "styled-components";
 import { Navbar, Nav } from "react-bootstrap";
 
 import { Button, NavItem } from "../ui";
+import Silver from "../profile/silver/Silver";
 
 import { logoutUser } from "../../redux/actions/authActions";
 import { clearCurrentProfile } from "../../redux/actions/profileActions";
@@ -37,6 +38,10 @@ const Navigation = props => {
                 <NavItem>
                   <NavLink to="/mymarkers">Мої маркери</NavLink>
                 </NavItem>
+                <NavItem>
+                  <NavLink to="/profile">Профіль</NavLink>
+                </NavItem>
+                <Silver />
                 <Button
                   empty
                   onClick={() => {

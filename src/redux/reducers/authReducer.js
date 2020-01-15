@@ -14,6 +14,14 @@ export default function(state = initialState, action) {
         isAuthenticated: !isEmpty(action.payload),
         user: action.payload
       };
+    case actionTypes.SET_USER_NAME:
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          name: action.payload
+        }
+      };
     default:
       return state;
   }

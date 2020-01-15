@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 
 import AddCommentForm from "../../forms/AddCommentForm";
+import HistoryDisplay from "./HistoryDisplay";
 import { Button, Spinner } from "../";
 
 const VisualDataDisplay = ({
@@ -11,7 +12,8 @@ const VisualDataDisplay = ({
   id,
   comments,
   postComment,
-  user
+  user,
+  statusChange
 }) => {
   const [display, setdisplay] = useState("photo");
   const [loading, setloading] = useState(true);
@@ -30,6 +32,13 @@ const VisualDataDisplay = ({
             <span>Коментарі</span>
           </Button>
         )}
+        <Button
+          width="100%"
+          margin="1rem 0"
+          onClick={() => setdisplay("history")}
+        >
+          <span>Історія</span>
+        </Button>
       </ControlPanel>
       <DisplayArea>
         {display === "photo" && (
@@ -85,6 +94,10 @@ const VisualDataDisplay = ({
                 <AddCommentForm postComment={postComment} markerId={id} />
               )}
           </CommentsContainer>
+        )}
+        {/* Displaying history with admin style */}
+        {display === "history" && (
+          <HistoryDisplay statusChange={statusChange} admin />
         )}
       </DisplayArea>
     </VisualDataDisplayWrapper>

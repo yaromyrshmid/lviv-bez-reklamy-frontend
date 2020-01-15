@@ -3,6 +3,7 @@ import jwt_decode from "jwt-decode";
 
 import setAuthToken from "../../utils/setAuthToken";
 import * as actionTypes from "../actions/types";
+import { getErrors } from "./errorActions";
 
 // Register User
 export const registerUser = (userData, history) => dispatch => {
@@ -12,10 +13,7 @@ export const registerUser = (userData, history) => dispatch => {
       history.push("/registersuccess");
     })
     .catch(err => {
-      dispatch({
-        type: actionTypes.GET_ERRORS,
-        payload: err.response.data
-      });
+      dispatch(getErrors(err));
     });
 };
 
@@ -57,12 +55,9 @@ export const loginUser = userData => dispatch => {
       // Set current user
       dispatch(setCurrentUser(decoded));
     })
-    .catch(err =>
-      dispatch({
-        type: actionTypes.GET_ERRORS,
-        payload: err.response.data
-      })
-    );
+    .catch(err => {
+      dispatch(getErrors(err));
+    });
 };
 
 // Forgot password - Send link to email to set new password

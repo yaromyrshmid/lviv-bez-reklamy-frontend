@@ -3,7 +3,8 @@ import * as actionTypes from "../actions/types";
 const initialState = {
   userMarkers: [],
   profile: null,
-  loading: true
+  loading: true,
+  silver: null
 };
 
 export default function(state = initialState, action) {
@@ -25,16 +26,47 @@ export default function(state = initialState, action) {
           }
         })
       };
+    case actionTypes.GET_PROFILE:
+      return {
+        ...state,
+        profile: action.payload,
+        loading: false
+      };
+    case actionTypes.SET_PROFILE_PHOTO:
+      return {
+        ...state,
+        profile: {
+          ...state.profile,
+          photo: action.payload
+        },
+        loading: false
+      };
+    case actionTypes.GET_SILVER:
+      return {
+        ...state,
+        silver: action.payload
+      };
     case actionTypes.PROFILE_LOADING:
       return {
         ...state,
         loading: true
       };
+    case actionTypes.PROFILE_LOADING_STOP:
+      return {
+        ...state,
+        loading: false
+      };
     case actionTypes.CLEAR_CURRENT_PROFILE:
       return {
         ...state,
         profile: null,
-        userMarkers: []
+        userMarkers: [],
+        silver: null
+      };
+    case actionTypes.GET_ERRORS:
+      return {
+        ...state,
+        loading: false
       };
     default:
       return state;

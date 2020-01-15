@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import styled from "styled-components";
 
-import { Button } from "../ui";
+import { Button, ErrorsGeneral } from "../ui";
 import TextFieldGroup from "./fields/TextFieldGroup";
 import { registerUser } from "../../redux/actions/authActions";
 
@@ -61,6 +61,7 @@ const Registration = props => {
         <Button type="submit" width="10rem">
           <span>Зареєструватись</span>
         </Button>
+        <ErrorsGeneral />
       </form>
     </RegisterFormWrapper>
   );
