@@ -41,7 +41,9 @@ const Navigation = props => {
                 <NavItem>
                   <NavLink to="/profile">Профіль</NavLink>
                 </NavItem>
+
                 <Silver />
+
                 <Button
                   empty
                   onClick={() => {

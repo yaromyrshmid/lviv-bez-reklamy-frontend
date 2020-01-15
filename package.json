@@ -13,6 +13,7 @@
     "filepond-plugin-file-validate-type": "^1.2.4",
     "filepond-plugin-image-preview": "^4.6.0",
     "filepond-plugin-image-resize": "^2.0.4",
+    "filepond-plugin-image-transform": "^3.7.0",
     "google-map-react": "^1.1.5",
     "google-maps-react": "^2.0.2",
     "jwt-decode": "^2.2.0",

@@ -11,7 +11,7 @@ const HistoryDisplay = ({ statusChange, admin }) => {
           {statuses
             .find(statusObj => statusObj.value === status.to)
             .ukr.toLowerCase()}
-          : {new Date(status.changedAt).toLocaleString("uk-UA")}
+          : {new Date(status.changedAt).toLocaleString("uk-UA").slice(0, -3)}
         </p>
       ))}
     </HistoryWrapper>
